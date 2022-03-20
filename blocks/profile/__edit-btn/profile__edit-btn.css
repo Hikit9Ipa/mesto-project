@@ -1,4 +1,4 @@
-.profile__edit_btn {
+.profile__edit-btn {
   background: url("../../../images/edit_btn.svg");
   width: 24px;
   height: 24px;
@@ -12,12 +12,12 @@
   
 }
  @media screen and (max-width: 767px) {
-  .profile__edit_btn {
+  .profile__edit-btn {
     max-width: 18px;
     max-height: 18px;
     background-size: 7.5px 7.5px;
   }
 } 
-.profile__edit_btn:hover {
+.profile__edit-btn:hover {
   opacity: .6;
 }
