@@ -1,0 +1,8 @@
+.element__heart-btn_active{
+    width: 22px;
+    height:19px ;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    background: url("/images/likeBtnActivesvg.svg");
+}

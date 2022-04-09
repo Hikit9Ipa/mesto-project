@@ -8,6 +8,7 @@
 **Flex**
 **Popup**
 **BeM**
+**JS**
 
 
 ***Ссылка на сайт https://hikit9ipa.github.io/mesto-project/***
