@@ -11,7 +11,7 @@
     background-size: cover;
     cursor: pointer;
     border: none;
-    display: none;
+
   }
   
   .elements__delete-btn:hover {
