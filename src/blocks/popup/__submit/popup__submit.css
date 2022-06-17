@@ -1,0 +1,28 @@
+.popup__submit {
+  max-width: 358px;
+  width: 100%;
+  border: none;
+  margin: 48px auto 37px;
+  padding: 15px 0 15px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  background-color: black;
+  color: #ffffff;
+  border-radius: 2px;
+}
+.popup__submit:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.popup__submit_inactive {
+  border: 1px solid #000000;
+  border-radius: 2px;
+  background-color: white;
+  color: #000000;
+}
+.popup__submit_inactive:hover{
+  border: 1px solid #000000;
+  border-radius: 2px;
+  background-color: white;
+}
