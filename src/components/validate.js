@@ -265,10 +265,10 @@ const toggleButtonState = (inputList, buttonElement) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
-    buttonElement.classList.add('form__submit_inactive');
+    buttonElement.classList.add(enableValidationParams.inactiveButtonClass);
   } else {
         // иначе сделай кнопку активной
-    buttonElement.classList.remove('form__submit_inactive');
+    buttonElement.classList.remove(enableValidationParams.inactiveButtonClass);
   }
 }; 
 // Вызовем функцию isValid на каждый ввод символа
