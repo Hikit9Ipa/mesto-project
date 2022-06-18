@@ -248,6 +248,8 @@ const isValid = (formElement, inputElement) => {
     //console.log("inputElement.validity.valid " + inputElement.validity.valid);
     // showInputError теперь получает параметром форму, в которой
     // находится проверяемое поле, и само это поле
+    console.log('false');
+    console.log('true');
     showInputError(
       formElement,
       inputElement,
@@ -255,6 +257,7 @@ const isValid = (formElement, inputElement) => {
       enableValidationParams
     );
   } else {
+    console.log('true');
     // hideInputError теперь получает параметром форму, в которой
     // находится проверяемое поле, и само это поле
     hideInputError(formElement, inputElement, enableValidationParams);
@@ -266,9 +269,11 @@ const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
     buttonElement.classList.add(enableValidationParams.inactiveButtonClass);
+    firstValidateForm(buttonElement,true)
   } else {
         // иначе сделай кнопку активной
     buttonElement.classList.remove(enableValidationParams.inactiveButtonClass);
+    firstValidateForm(buttonElement,false)
   }
 }; 
 // Вызовем функцию isValid на каждый ввод символа
@@ -326,4 +331,10 @@ const hasInvalidInput = (inputList) => {
     return !inputElement.validity.valid;
   });
 };
-export{enableValidation }
+function firstValidateForm(formElement,a){
+  formElement.disabled = a;
+  console.log('dis');
+}
+   
+
+export{enableValidation,firstValidateForm }

@@ -59,36 +59,7 @@
 // };
 // export { openPopup, closePopup, escClosePopup, closePopupOverlay ,renderLoading};
 import{
-  popupClosebtns,
-  profileEditBtn,
-  addNewCardBtn,
-  cardPopupCloseBtn,
-  cardSubmitBtn,
-  formElement,
-  nameInput,
-  jobInput,
-  profileName,
-  profileStatus,
-  formElementCard,
-  cardsContainer,
-  cardTemplate,
-  cardNameInput,
-  cardSrcInput,
-  imgOpen,
-  imgBigSize,
-  imgCaption,
-  popupProfile,
-  popupCard,
-  formInput,
   popups,
-  enableValidationParams,
-  profileAvatar,
-  profileBtnSubmit,
-  profileAvatarBtn,
-  popupAvatar,
-  ElementElement,
-  avatarUrlinp,
-  avatarSubmBtn,
 } from './utils.js';
 
 

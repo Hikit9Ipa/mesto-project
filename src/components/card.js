@@ -97,40 +97,16 @@
 
 // export { initialCards, createCard, renderCard };
 import{
-  popupClosebtns,
-  profileEditBtn,
-  addNewCardBtn,
-  cardPopupCloseBtn,
-  cardSubmitBtn,
-  formElement,
-  nameInput,
-  jobInput,
-  profileName,
-  profileStatus,
-  formElementCard,
+
   cardsContainer,
   cardTemplate,
-  cardNameInput,
-  cardSrcInput,
   imgOpen,
   imgBigSize,
   imgCaption,
-  popupProfile,
-  popupCard,
-  formInput,
-  popups,
-  enableValidationParams,
-  profileAvatar,
-  profileBtnSubmit,
-  profileAvatarBtn,
-  popupAvatar,
-  ElementElement,
-  avatarUrlinp,
-  avatarSubmBtn,
   initialCards
 } from './utils.js';
 import{
-  openPopup,closePopup
+  openPopup
 } from './modal.js';
 
 function createCard(cardName, cardSrc) {
@@ -138,8 +114,9 @@ function createCard(cardName, cardSrc) {
     .querySelector(".elements__element")
     .cloneNode(true);
   cardElement.querySelector(".elements__title").textContent = cardName;
-  cardElement.querySelector(".elements__image").src = cardSrc;
-  cardElement.querySelector(".elements__image").alt = cardName;
+  const cardElementImg = cardElement.querySelector(".elements__image")
+  cardElementImg.src = cardSrc;
+  cardElementImg.alt = cardName;
   const cardDeleteBtn = cardElement.querySelector(".elements__delete-btn");
   cardDeleteBtn.addEventListener("click", function (e) {
     e.target.closest(".elements__element").remove(cardElement);
@@ -153,14 +130,12 @@ function createCard(cardName, cardSrc) {
 
   const imgFullSize = cardElement.querySelector(".elements__image");
   imgFullSize.addEventListener("click", (e) => {
-    openPopup(imgOpen);
+    //openPopup(imgOpen);
     imgBigSize.src = cardSrc;
     imgCaption.textContent = cardName;
     imgBigSize.alt = cardName;
+    openPopup(imgOpen);
   });
   return cardElement;
 }
-initialCards.forEach(function (element) {
-  cardsContainer.append(createCard(element.name, element.link));
-});
 export{createCard}

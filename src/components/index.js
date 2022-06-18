@@ -116,7 +116,6 @@ import{
   popupClosebtns,
   profileEditBtn,
   addNewCardBtn,
-  cardPopupCloseBtn,
   cardSubmitBtn,
   formElement,
   nameInput,
@@ -125,24 +124,12 @@ import{
   profileStatus,
   formElementCard,
   cardsContainer,
-  cardTemplate,
   cardNameInput,
   cardSrcInput,
-  imgOpen,
-  imgBigSize,
-  imgCaption,
   popupProfile,
   popupCard,
-  formInput,
-  popups,
   enableValidationParams,
-  profileAvatar,
-  profileBtnSubmit,
-  profileAvatarBtn,
-  popupAvatar,
-  ElementElement,
-  avatarUrlinp,
-  avatarSubmBtn,
+  initialCards
 } from './utils.js';
 
 import{
@@ -151,17 +138,21 @@ import{
 import{
   createCard
 } from './card.js';
-import{enableValidation} from './validate.js';
+import{enableValidation,firstValidateForm} from './validate.js';
 
 popupClosebtns.forEach(e => e.addEventListener('click', e =>closePopup(e.target.closest(".popup"))));
 
 profileEditBtn.addEventListener("click", function () {
   //обработчик открытия профиля
-  openPopup(popupProfile);
+  //openPopup(popupProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
+  openPopup(popupProfile);
 });
 
+initialCards.forEach(function (element) {
+  cardsContainer.append(createCard(element.name, element.link));
+});
 
 function handleProfileFormSubmit(evt) {
   // устанавливает имя и job пользователя и закрывает popup
@@ -175,6 +166,7 @@ formElement.addEventListener("submit", handleProfileFormSubmit); // Прикре
 addNewCardBtn.addEventListener("click", () =>{
   cardNameInput.value= '';
   cardSrcInput.value = '';
+  firstValidateForm(cardSubmitBtn ,true);
   openPopup(popupCard)
 });
 function addCard(evt) {
