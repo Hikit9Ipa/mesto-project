@@ -94,6 +94,7 @@
               id="popup__input-name"
               minlength="2"
               maxlength="40"
+              placeholder = "Имя"
               required
             />
             <span class="popup__input-name_error"></span> 
@@ -105,6 +106,7 @@
               id="popup__input-status"
               minlength="2"
               maxlength="200"
+              placeholder = "Профессия"
               required
             />
             <span class="popup__input-status_error"></span> 
@@ -140,6 +142,7 @@
               id="popup__input-cardname"
               minlength="2"
               maxlength="30"
+              placeholder = "Название"
               required
             />
             <span class="popup__input-cardname_error"></span> 
@@ -149,13 +152,14 @@
               value="Ссылка на картинку"
               class="popup__input"
               id="popup__input-cardsrc"
+              placeholder = "Ссылка на картинку"
               required
             />
             <span class="popup__input-cardsrc_error"></span> 
           </fieldset>
           <button
             type="submit"
-            class="popup__submit"
+            class="popup__submit popup__submit_inactive"
             aria-label="создать"
             id="cardSubmitBtn"
           >
@@ -181,6 +185,7 @@
             id="url-avatar-input"
               type="url"
               class="popup__input"
+              placeholder = "Ссылка на аватар" 
               required
             />
             <span class="url-avatar-input_error"></span> 
@@ -198,6 +203,7 @@
 
     <template id="cardTemplate">
       <div class="elements__element">
+        <div class="elements__image-container">
         <button type="button" class="elements__delete-btn" id="qqqwe"></button>
         <img
           class="elements__image"
@@ -205,6 +211,7 @@
           alt=""
           id=""
         />
+      </div>
         <div class="elements__info">
           <h2 class="elements__title">Карачаевск</h2>
           <div class="elements__heart-btn-area">

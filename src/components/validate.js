@@ -268,11 +268,11 @@ const toggleButtonState = (inputList, buttonElement) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
-    buttonElement.classList.add(enableValidationParams.inactiveButtonClass);
+    //buttonElement.classList.add(enableValidationParams.inactiveButtonClass);
     firstValidateForm(buttonElement,true)
   } else {
         // иначе сделай кнопку активной
-    buttonElement.classList.remove(enableValidationParams.inactiveButtonClass);
+    //buttonElement.classList.remove(enableValidationParams.inactiveButtonClass);
     firstValidateForm(buttonElement,false)
   }
 }; 
@@ -333,7 +333,10 @@ const hasInvalidInput = (inputList) => {
 };
 function firstValidateForm(formElement,a){
   formElement.disabled = a;
-  console.log('dis');
+  if(a){  formElement.classList.add(enableValidationParams.inactiveButtonClass);}
+  else{formElement.classList.remove(enableValidationParams.inactiveButtonClass);}
+  //formElement.classList.add(enableValidationParams.inactiveButtonClass);
+  console.log('disq');
 }
    
 

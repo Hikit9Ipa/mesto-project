@@ -138,7 +138,7 @@ import{
 import{
   createCard
 } from './card.js';
-import{enableValidation,firstValidateForm} from './validate.js';
+import{enableValidation,firstValidateForm,setEventListeners} from './validate.js';
 
 popupClosebtns.forEach(e => e.addEventListener('click', e =>closePopup(e.target.closest(".popup"))));
 
@@ -164,8 +164,10 @@ function handleProfileFormSubmit(evt) {
 formElement.addEventListener("submit", handleProfileFormSubmit); // Прикрепляем обработчик к форме
 
 addNewCardBtn.addEventListener("click", () =>{
+  console.log("open card");
   cardNameInput.value= '';
   cardSrcInput.value = '';
+  //cardSubmitBtn.classList.add(enableValidationParams.inactiveButtonClass);
   firstValidateForm(cardSubmitBtn ,true);
   openPopup(popupCard)
 });
