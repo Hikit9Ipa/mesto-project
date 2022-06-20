@@ -63,6 +63,7 @@ const enableValidationParams = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input_error_active",
 };
+let userId;
 export {
   popupClosebtns,
   profileEditBtn,
@@ -94,5 +95,6 @@ export {
   ElementElement,
   avatarUrlinp,
   avatarSubmBtn,
+  userId,
   //initialCards
 };

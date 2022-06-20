@@ -21,13 +21,14 @@ import{
   profileAvatarBtn,
   popupAvatar,
   avatarUrlinp,
+  userId,avatarSubmBtn,
 } from './utils.js';
 
 import{
-  openPopup,closePopup
+  openPopup,closePopup,renderLoading
 } from './modal.js';
 import{
-  createCard,renderCard,
+  createCard,renderCard,initialCards
 } from './card.js';
 import{enableValidation,firstValidateForm,setEventListeners} from './validate.js';
 import {
@@ -53,49 +54,46 @@ function handleUpdateAvatar(evt) {
 
   profileAvatar.src = avatarUrlinp.value;
   //console.log('aaaq');
-  editAvatar(profileAvatar.src);
-  closePopup(popupAvatar);
-}
+  editAvatar(profileAvatar.src)
+  .then(() => {
+    profileAvatar.src = avatarUrlinp.value
+    closePopup(popupAvatar); 
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    renderLoading(false, avatarSubmBtn, 'Сохранить');
+  })
+};  
 // //листнер аватара
 popupAvatar.addEventListener("submit", handleUpdateAvatar);
-
-
-
-
-
-// profileEditBtn.addEventListener("click", function () {
-//   //обработчик открытия профиля
-//   //openPopup(popupProfile);
-//   nameInput.value = profileName.textContent;
-//   jobInput.value = profileStatus.textContent;
-//   openPopup(popupProfile);
-// });
-
-// initialCards.forEach(function (element) {
-//   cardsContainer.append(createCard(element.name, element.link));
-// });
-
-
-
-
 
 
 //открывает попап профиля
 profileEditBtn.addEventListener("click", function () {
   //обработчик открытия профиля
-  openPopup(popupProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
+  openPopup(popupProfile);
 });
 //добавляет поля профиля на страницу и сервер
 function handleProfileFormSubmit(evt) {
+  renderLoading(true, profileBtnSubmit, 'Сохранить...');
   evt.preventDefault();
-  console.log('1234')
+ // console.log('1234')
+  editUser(profileName.textContent, profileStatus.textContent).then(() => {
   profileName.textContent = nameInput.value;
   profileStatus.textContent = jobInput.value;
-  editUser(profileName.textContent, profileStatus.textContent);
   closePopup(popupProfile);
-}
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    renderLoading(false, profileBtnSubmit, 'Сохранить');
+})
+};
 //листнер профиля
 profileBtnSubmit.addEventListener("click", handleProfileFormSubmit);
 
@@ -105,22 +103,49 @@ profileBtnSubmit.addEventListener("click", handleProfileFormSubmit);
 addNewCardBtn.addEventListener("click", () =>{
   cardNameInput.value= '';
   cardSrcInput.value = '';
-  firstValidateForm(cardSubmitBtn ,true);
+  //firstValidateForm(cardSubmitBtn ,true);
   openPopup(popupCard)
 });
-//добавляет поля карты на страницу и сервер
+
 function handleCardFormSubmit(evt) {
+  renderLoading(true, cardSubmitBtn, 'Сохранение...');  
   evt.preventDefault();
-  const card = createCard(cardNameInput.value, cardSrcInput.value);
-  renderCard(card, cardsContainer);
-  console.log(cardNameInput.value +'     '+cardSrcInput.value)
-  apiAddNewCard(cardNameInput.value, cardSrcInput.value);
-  closePopup(popupCard);
+  //console.log(cardNameInput.value +'     '+cardSrcInput.value)
+  apiAddNewCard(cardNameInput.value, cardSrcInput.value)
+  .then ((card) => {
+    //console.log(card + " card")
+    //const card = createCard(cardNameInput.value, cardSrcInput.value);
+    renderCard(createCard(cardNameInput.value, cardSrcInput.value,card._id,card.likes, card.owner._id,), cardsContainer);
+    formElementCard.reset();
+    closePopup(popupCard);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    renderLoading(false,cardSubmitBtn, 'Создать');
+  })  
+  
 }
+
 //листнер карты
 cardSubmitBtn.addEventListener("click",handleCardFormSubmit);
 
 
 enableValidation(enableValidationParams);
-getUser();
-getInitialCards();
+
+Promise.all([getUser(), getInitialCards()])
+    .then(([user, card]) => {
+  userId = user._id;
+  profileName.textContent = user.name;
+  profileStatus.textContent = user.about;
+  profileAvatar.src = user.avatar;
+  initialCards(card);
+
+})
+.catch((err) => {
+  console.log(err);
+})
+
+//getUser();
+//getInitialCards();

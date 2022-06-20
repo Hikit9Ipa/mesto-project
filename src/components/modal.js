@@ -15,7 +15,7 @@ function renderLoading(isLoading, button, defaultText) {
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", escClosePopup);
-  closePopupOverlay();
+ // closePopupOverlay();
 }
 
 //Функция закрытия всех popup-окон
@@ -30,13 +30,11 @@ function escClosePopup(evt) {
     closePopup(openedPopup);
   }
 }
-function closePopupOverlay() {
   popups.forEach((popup) => {
     popup.addEventListener("click", (evt) => {
-      if (evt.target.classList.contains("popup_opened")) {
+      if (evt.target.classList.contains("popup_opened") || evt.target.classList.contains("popup__close")) {
         closePopup(popup);
       }
     });
   });
-}
-export { openPopup, closePopup, escClosePopup, closePopupOverlay,renderLoading};
+export { openPopup, closePopup, escClosePopup,renderLoading};
