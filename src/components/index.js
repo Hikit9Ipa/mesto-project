@@ -39,7 +39,7 @@ import {
   apiAddNewCard,
 } from "./api.js";
 
-popupClosebtns.forEach(e => e.addEventListener('click', e =>closePopup(e.target.closest(".popup"))));
+//popupClosebtns.forEach(e => e.addEventListener('click', e =>closePopup(e.target.closest(".popup"))));
 
 //открывает попап аватара
 profileAvatarBtn.addEventListener("click", function () {
@@ -52,7 +52,7 @@ profileAvatarBtn.addEventListener("click", function () {
 function handleUpdateAvatar(evt) {
   evt.preventDefault();
 
-  profileAvatar.src = avatarUrlinp.value;
+ // profileAvatar.src = avatarUrlinp.value;
   //console.log('aaaq');
   editAvatar(profileAvatar.src)
   .then(() => {
@@ -82,7 +82,8 @@ function handleProfileFormSubmit(evt) {
   renderLoading(true, profileBtnSubmit, 'Сохранить...');
   evt.preventDefault();
  // console.log('1234')
-  editUser(profileName.textContent, profileStatus.textContent).then(() => {
+  editUser(profileName.textContent, profileStatus.textContent)
+  .then(() => {
   profileName.textContent = nameInput.value;
   profileStatus.textContent = jobInput.value;
   closePopup(popupProfile);
@@ -103,7 +104,7 @@ profileBtnSubmit.addEventListener("click", handleProfileFormSubmit);
 addNewCardBtn.addEventListener("click", () =>{
   cardNameInput.value= '';
   cardSrcInput.value = '';
-  //firstValidateForm(cardSubmitBtn ,true);
+  firstValidateForm(cardSubmitBtn ,true);
   openPopup(popupCard)
 });
 
