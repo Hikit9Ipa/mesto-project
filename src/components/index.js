@@ -1,6 +1,5 @@
 import "../pages/index.css";
 import{
-  popupClosebtns,
   profileEditBtn,
   addNewCardBtn,
   cardSubmitBtn,
