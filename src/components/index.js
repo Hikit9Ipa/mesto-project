@@ -1,6 +1,5 @@
 import "../pages/index.css";
 import{
-  popupClosebtns,
   profileEditBtn,
   addNewCardBtn,
   cardSubmitBtn,
@@ -52,7 +51,7 @@ profileAvatarBtn.addEventListener("click", function () {
 function handleUpdateAvatar(evt) {
   evt.preventDefault();
 
- // profileAvatar.src = avatarUrlinp.value;
+ //profileAvatar.src = avatarUrlinp.value;
   //console.log('aaaq');
   editAvatar(profileAvatar.src)
   .then(() => {
@@ -80,12 +79,10 @@ profileEditBtn.addEventListener("click", function () {
 //добавляет поля профиля на страницу и сервер
 function handleProfileFormSubmit(evt) {
   renderLoading(true, profileBtnSubmit, 'Сохранить...');
-  evt.preventDefault();
- // console.log('1234')
-  editUser(profileName.textContent, profileStatus.textContent)
-  .then(() => {
-  profileName.textContent = nameInput.value;
+  evt.preventDefault();editUser(nameInput.value, jobInput.value)
+  .then(() => { profileName.textContent = nameInput.value;
   profileStatus.textContent = jobInput.value;
+
   closePopup(popupProfile);
   })
   .catch((err) => {

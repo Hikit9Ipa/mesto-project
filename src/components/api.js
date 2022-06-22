@@ -49,7 +49,7 @@ import {
       headers: apiConfig.headers,
     })
       .then(_checkResponse)
-    //   .then((result) => {
+      //.then((result) => {console.log(result)
     //     profileName.textContent = result.name;
     //     profileStatus.textContent = result.about;
     //     profileAvatar.src = result.avatar;
@@ -103,6 +103,7 @@ import {
         })
       })
       .then (_checkResponse)
+      //.then((res) => {console.log(res)})
     //   .then((res) => {
     //     //console.log('3');
     //    // renderLoading(false, profileBtnSubmit, 'Сохранить');

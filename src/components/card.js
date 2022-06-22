@@ -16,7 +16,7 @@ function renderCard(card, container) {
 
 function createCard(cardName, cardSrc, cardId, cardlikes, cardownerId) {
   //ver.9
-  console.log(cardName+" "+ cardSrc+" "+ cardId+" "+ cardlikes.length+" "+ cardownerId)
+  //console.log(cardName+" "+ cardSrc+" "+ cardId+" "+ cardlikes.length+" "+ cardownerId)
   const cardElement = ElementElement.cloneNode(true);
   const cardElementTitle = cardElement.querySelector(".elements__title");
   const cardElementImg = cardElement.querySelector(".elements__image");

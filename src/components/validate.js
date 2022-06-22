@@ -124,7 +124,7 @@ function firstValidateForm(formElement,a){
   if(a){  formElement.classList.add(enableValidationParams.inactiveButtonClass);}
   else{formElement.classList.remove(enableValidationParams.inactiveButtonClass);}
   //formElement.classList.add(enableValidationParams.inactiveButtonClass);
-  console.log('disq');
+  //console.log('disq');
 }
    
 
