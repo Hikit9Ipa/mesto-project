@@ -1,7 +1,7 @@
 
 import{
   popups,
-} from './utils.js';
+} from './variables.js';
 
 
 function renderLoading(isLoading, button, defaultText) {

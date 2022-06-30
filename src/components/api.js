@@ -1,3 +1,5 @@
+
+
 import {
     cardSubmitBtn,
     profileName,
@@ -5,7 +7,7 @@ import {
     profileAvatar,
     profileBtnSubmit,
     avatarSubmBtn,
-  } from "./utils.js";
+  } from "./variables.js";
   import { initialCards } from "./card.js";
   import { renderLoading } from "./modal";
   

@@ -21,7 +21,7 @@ import{
   popupAvatar,
   avatarUrlinp,
   userId,avatarSubmBtn,
-} from './utils.js';
+} from './variables.js';
 
 import{
   openPopup,closePopup,renderLoading

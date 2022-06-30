@@ -1,7 +1,7 @@
 
 import {
   enableValidationParams,
-} from "./utils.js";
+} from "./variables.js";
 import { openPopup, closePopup } from "./modal.js";
 
 
