@@ -16,48 +16,13 @@ import {
       "Content-Type": "application/json",
     },
   };
-// ver 9.0   function getUser() {
-//     return fetch(`${apiConfig.baseUrl}/users/me`, {
-//       headers: apiConfig.headers,
-//     })
-//       .then(_checkResponse)
-//       .then((result) => {
-//         profileName.textContent = result.name;
-//         profileStatus.textContent = result.about;
-//         profileAvatar.src = result.avatar;
-//        console.log(result.name + " " + result.about + " " + result.avatar);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }
-  
-//   function getInitialCards() {
-//     return fetch(`${apiConfig.baseUrl}/cards`, {
-//       headers: apiConfig.headers,
-//     })
-//       .then(_checkResponse)
-//       .then((result) => {
-//         initialCards(result);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }
+
   function getUser() {
     return fetch(`${apiConfig.baseUrl}/users/me`, {
       headers: apiConfig.headers,
     })
       .then(_checkResponse)
-      //.then((result) => {console.log(result)
-    //     profileName.textContent = result.name;
-    //     profileStatus.textContent = result.about;
-    //     profileAvatar.src = result.avatar;
-    //    // console.log(result.name + " " + result.about + " " + result.avatar);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+      
   };
   
   function getInitialCards() {
@@ -65,12 +30,7 @@ import {
       headers: apiConfig.headers,
     })
       .then(_checkResponse)
-    //   .then((result) => {
-    //     initialCards(result);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    
   };
   //редактирование аватара
   function editAvatar(avatar) {
@@ -82,14 +42,7 @@ import {
         })
       })
       .then (_checkResponse)
-    //   .then((res) => {
-    //    // renderLoading(false, avatarSubmBtn, 'Сохранить');
-    //    // console.log(res);
-  
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
+    
   };
   
   //редактированиt профиля
@@ -103,15 +56,7 @@ import {
         })
       })
       .then (_checkResponse)
-      //.then((res) => {console.log(res)})
-    //   .then((res) => {
-    //     //console.log('3');
-    //    // renderLoading(false, profileBtnSubmit, 'Сохранить');
-    //    // console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
+      
   };
   
   function apiAddNewCard(title, src) {
@@ -124,12 +69,7 @@ import {
         })
       })
       .then (_checkResponse)
-    //   .then((res) => {
-    //    // renderLoading(false, cardSubmitBtn, 'Создать');
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
+    
   };
   function likeCard(cardId) {
       return fetch (`${apiConfig.baseUrl}/cards/likes/${cardId}`, {
@@ -137,12 +77,7 @@ import {
           headers: apiConfig.headers,
         })
         .then (_checkResponse)
-        // .then ((res) => {
-        //   cardlikes.textContent = res.likes.length;
-        // })
-        // .catch((err) => {
-        //   console.log(err);
-        // });
+        
     };
   
     function dislikeCard(cardId, cardlikes) {
@@ -151,12 +86,7 @@ import {
           headers: apiConfig.headers,
         })
         .then (_checkResponse)
-        // .then ((res) => {
-        //   cardlikes.textContent = res.likes.length;
-        // })
-        // .catch((err) => {
-        //   console.log(err);
-        // });
+        
     };
     function deleteCard(cardId) {
       return fetch (`${apiConfig.baseUrl}/cards/${cardId}`, {
@@ -164,9 +94,6 @@ import {
           headers: apiConfig.headers,
         })
         .then (_checkResponse)
-        // .catch((err) => {
-        //   console.log(err);
-        // });
       };
 
 

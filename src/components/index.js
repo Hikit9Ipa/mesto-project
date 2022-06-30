@@ -38,7 +38,6 @@ import {
   apiAddNewCard,
 } from "./api.js";
 
-//popupClosebtns.forEach(e => e.addEventListener('click', e =>closePopup(e.target.closest(".popup"))));
 
 //открывает попап аватара
 profileAvatarBtn.addEventListener("click", function () {
@@ -51,8 +50,6 @@ profileAvatarBtn.addEventListener("click", function () {
 function handleUpdateAvatar(evt) {
   evt.preventDefault();
 
- //profileAvatar.src = avatarUrlinp.value;
-  //console.log('aaaq');
   editAvatar(profileAvatar.src)
   .then(() => {
     profileAvatar.src = avatarUrlinp.value
@@ -79,7 +76,8 @@ profileEditBtn.addEventListener("click", function () {
 //добавляет поля профиля на страницу и сервер
 function handleProfileFormSubmit(evt) {
   renderLoading(true, profileBtnSubmit, 'Сохранить...');
-  evt.preventDefault();editUser(nameInput.value, jobInput.value)
+  evt.preventDefault();
+  editUser(nameInput.value, jobInput.value)
   .then(() => { profileName.textContent = nameInput.value;
   profileStatus.textContent = jobInput.value;
 
@@ -108,11 +106,8 @@ addNewCardBtn.addEventListener("click", () =>{
 function handleCardFormSubmit(evt) {
   renderLoading(true, cardSubmitBtn, 'Сохранение...');  
   evt.preventDefault();
-  //console.log(cardNameInput.value +'     '+cardSrcInput.value)
   apiAddNewCard(cardNameInput.value, cardSrcInput.value)
   .then ((card) => {
-    //console.log(card + " card")
-    //const card = createCard(cardNameInput.value, cardSrcInput.value);
     renderCard(createCard(cardNameInput.value, cardSrcInput.value,card._id,card.likes, card.owner._id,), cardsContainer);
     formElementCard.reset();
     closePopup(popupCard);
@@ -144,6 +139,3 @@ Promise.all([getUser(), getInitialCards()])
 .catch((err) => {
   console.log(err);
 })
-
-//getUser();
-//getInitialCards();

@@ -15,7 +15,6 @@ function renderLoading(isLoading, button, defaultText) {
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", escClosePopup);
- // closePopupOverlay();
 }
 
 //Функция закрытия всех popup-окон

@@ -11,7 +11,6 @@ import { openPopup, closePopup } from "./modal.js";
 const showInputError = (formElement,inputElement,errorMessage,enableValidationParams) => {
   // Находим элемент ошибки внутри самой функции
   const errorElement = formElement.querySelector(`.${inputElement.id}_error`);
-  //console.log(errorElement+'errell');
   // Остальной код такой же
   inputElement.classList.add(enableValidationParams.inputErrorClass);
   errorElement.textContent = errorMessage;
@@ -20,10 +19,7 @@ const showInputError = (formElement,inputElement,errorMessage,enableValidationPa
 
 const hideInputError = (formElement, inputElement, enableValidationParams) => {
   // Находим элемент ошибки
-  // console.log(formElement);
-  // console.log(inputElement);
   const errorElement = formElement.querySelector(`.${inputElement.id}_error`);
-  // console.log(errorElement);
   // Остальной код такой же
   inputElement.classList.remove(enableValidationParams.inputErrorClass);
   errorElement.classList.remove(enableValidationParams.errorClass);
@@ -32,7 +28,6 @@ const hideInputError = (formElement, inputElement, enableValidationParams) => {
 // Функция, которая проверяет валидность поля
 const isValid = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
-    //console.log("inputElement.validity.valid " + inputElement.validity.valid);
     // showInputError теперь получает параметром форму, в которой
     // находится проверяемое поле, и само это поле
     console.log('false');
@@ -55,11 +50,9 @@ const toggleButtonState = (inputList, buttonElement) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
-    //buttonElement.classList.add(enableValidationParams.inactiveButtonClass);
     firstValidateForm(buttonElement,true)
   } else {
         // иначе сделай кнопку активной
-    //buttonElement.classList.remove(enableValidationParams.inactiveButtonClass);
     firstValidateForm(buttonElement,false)
   }
 }; 
@@ -78,7 +71,6 @@ const setEventListeners = (formElement, enableValidationParams) => {
 
   // Обойдём все элементы полученной коллекции
   inputList.forEach((inputElement) => {
-    //console.log("inputElement " + inputElement);
     // каждому полю добавим обработчик события input
     inputElement.addEventListener("input", () => {
       // Внутри колбэка вызовем isValid,
@@ -94,7 +86,6 @@ const enableValidation = (enableValidationParams) => {
   const formList = Array.from(
     document.querySelectorAll(enableValidationParams.formSelector)
   );
-  // console.log(formList.length);
   // Переберём полученную коллекцию
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
@@ -123,8 +114,6 @@ function firstValidateForm(formElement,a){
   formElement.disabled = a;
   if(a){  formElement.classList.add(enableValidationParams.inactiveButtonClass);}
   else{formElement.classList.remove(enableValidationParams.inactiveButtonClass);}
-  //formElement.classList.add(enableValidationParams.inactiveButtonClass);
-  //console.log('disq');
 }
    
 
