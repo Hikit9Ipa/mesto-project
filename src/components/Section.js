@@ -4,3 +4,23 @@
 // Содержит публичный метод, который отвечает за отрисовку всех элементов. Отрисовка каждого отдельного элемента должна осуществляться функцией renderer.
 // Содержит публичный метод addItem, который принимает DOM-элемент и добавляет его в контейнер.
 // У класса Section нет своей разметки. Он получает разметку через функцию-колбэк и вставляет её в контейнер.
+
+export class Section {
+    constructor({items, renderer}, containerSelector) {
+        this._items = items; //массив карточек
+        this._renderer = renderer; //функция создания и отрисовки карточек
+        this._container = document.querySelector(containerSelector); //селектор контейнера, где будут находиться карточки
+    }
+
+    //добавление карточек в контейнер
+    addItem(element) {
+        this._container.prepend(element); 
+    }
+
+    //отрисовка всех карточек на странице
+    renderItems() { 
+        this._items.forEach((item) => {
+            this._renderer(item);
+        });
+    }
+}

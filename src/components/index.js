@@ -139,3 +139,12 @@ Promise.all([getUser(), getInitialCards()])
 .catch((err) => {
   console.log(err);
 })
+
+//Добавление готовых карточек на страницу
+// const cardlist = new Section({
+//   items: [],
+//   renderer: (items) => {
+//       const card = createNewCard(items);//createNewCard-функция создания экзепляра Card, название можно изменить)
+//       cards.addItem(card);
+//   }
+// }, cardsContainer);
