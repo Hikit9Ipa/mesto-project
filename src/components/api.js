@@ -97,33 +97,35 @@ export {
   likeCard,
   dislikeCard,
   deleteCard,
+  Api
 };
 
-export { Api };
 
-export class Api {
-  constructor({ baseUrl, headers }) {
+
+export default class Api {
+
+ constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
   }
   //получ информации о пользователе с сервера
   getUser() {
-    return fetch(`${this.baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: this.headers,
+      headers: this._headers,
     }).then(this._checkResponse);
   }
   //Метод получения карточек с сервера
   getInitialCards() {
-    return fetch(`${this.baseUrl}/cards`, {
-      headers: this.headers,
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers,
     }).then(this._checkResponse);
   }
   //редактирование аватара
   editAvatar(avatar) {
-    return fetch(`${this.baseUrl}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify({
         avatar: avatar,
       }),
@@ -132,9 +134,9 @@ export class Api {
 
   //редактированиt профиля
   editUser(nameInput, profileStatus) {
-    return fetch(`${this.baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify({
         name: nameInput,
         about: profileStatus,
@@ -143,9 +145,9 @@ export class Api {
   }
 
   apiAddNewCard(title, src) {
-    return fetch(`${this.baseUrl}/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify({
         name: title,
         link: src,
@@ -154,20 +156,20 @@ export class Api {
   }
 
   likeCard(cardId) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
-      headers: this.headers,
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 
   dislikeCard(cardId) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
     }).then(this._checkResponse);
   }
   deleteCard(cardId) {
-    return fetch(`${this.baseUrl}/cards/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
     }).then(this._checkResponse);
