@@ -3,9 +3,9 @@
 // Содержит публичный метод getUserInfo, который возвращает объект с данными пользователя. Данные для этого метода нужно получать от методов класса Api — подумайте над тем, как внедрить метод класса Api в getUserInfo. Когда данные пользователя нужно будет подставить в форму при открытии — метод вам пригодится.
 // Содержит публичный метод setUserInfo, который принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу.
 
-import { data } from "jquery";
+//import { data } from "jquery";
 
-export default class UserInfo{
+export class UserInfo{
     constructor({userName,userInfo}){
         this._userName = document.querySelector(userName);
         this._userInfo = document.querySelector(userInfo);
@@ -19,8 +19,8 @@ export default class UserInfo{
             userInfo: this._userInfo.textContent
         };
     }
-    setUserInfo(username, userjob) {
+    setUserInfo(username, userInfo) {
         this._userName.textContent = username;
-        this._userInfo.textContent = userinfo;
+        this._userInfo.textContent = userInfo;
       }
 }
