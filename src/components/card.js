@@ -43,8 +43,8 @@ export class Card {
 
     this._setEventListeners();
     this._hideDeleteButton();
-    this._setLikeCount(this._likes);
-    this.__checkLike();
+    this.setLikeCount(this._likes);
+    this._checkLike();
 
     return this._cardElement;
   }

@@ -20,7 +20,6 @@ import {
   profileAvatarBtn,
   popupAvatar,
   avatarUrlinp,
-  userId,
   avatarSubmBtn,
   apiConfig
 } from "./variables.js";
@@ -35,21 +34,27 @@ import {
 import {Api} from "./api.js";
 import {UserInfo} from "./UserInfo.js";
 import {Section} from "./Section.js";
+import {Card} from "./card.js";
 
 const api = new Api(apiConfig);
 
 const newUser = new UserInfo({
   userName: ".profile__name",
   userInfo: ".profile__status",
+  userAvatar: ".profile__avatar",
+
 });
 
-Promise.all([api.getUser(), api.getInitialCards()])
-  .then(([user, card]) => {
-    newUser.setUserInfo(user.name, user.about);
-    //userId = user._id;
+let userId = null;
 
-    card.reverse();
-    cardList.renderItems(card);
+Promise.all([api.getUser(), api.getInitialCards()])
+  .then(([user, cards]) => {
+    userId = user._id;
+
+    newUser.setUserInfo(user.name, user.about, user.avatar);
+
+    cards.reverse();
+    cardList.renderItems(cards);
 
    // profileName.textContent = user.name;
    // profileStatus.textContent = user.about;
@@ -58,7 +63,7 @@ Promise.all([api.getUser(), api.getInitialCards()])
  // .then(() => newUser.setAvatarSight())
   .catch((err) => console.log(err));
 
-// Добавление готовых карточек на страницу
+  // Добавление готовых карточек на страницу
 const cardList = new Section({
   items: [],
   renderer: (items) => {
@@ -66,6 +71,47 @@ const cardList = new Section({
       cardList.addItem(card);
   }
 }, cardsContainer);
+
+const createNewCard = (data) => {
+  const card = new Card({data, userId,
+    handleCardClick: () => {
+      console.log('big image');
+    },
+
+    handleDeleteCard: () => {
+      api.deleteCard(card._id)
+        .then(() => {
+          card.deleteCard();
+          console.log('12')
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    },
+    handleLikeCard: () => {
+      if (card.isLiked()) {
+        api.dislikeCard(card._id)
+          .then((data) => {
+            card.deleteLike();
+            card.setLikeCount(data.likes);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      } else {
+        api.likeCard(card._id)
+          .then((data) => {
+            card.addLike();
+            card.setLikeCount(data.likes);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+        }
+    }
+  }, cardTemplate);
+  return card.createCard();
+}
 
 // Promise.all([getUser(), getInitialCards()])
 //     .then(([user, card]) => {

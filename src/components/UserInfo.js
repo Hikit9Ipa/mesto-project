@@ -6,9 +6,10 @@
 //import { data } from "jquery";
 
 export class UserInfo{
-    constructor({userName,userInfo}){
+    constructor({userName,userInfo,userAvatar}){
         this._userName = document.querySelector(userName);
         this._userInfo = document.querySelector(userInfo);
+        this._userAvatar = document.querySelector(userAvatar);
 
 
     }
@@ -16,11 +17,13 @@ export class UserInfo{
 
         return {
             userName: this._userName.textContent,
-            userInfo: this._userInfo.textContent
+            userInfo: this._userInfo.textContent,
+            userAvatar:this._userAvatar.src
         };
     }
-    setUserInfo(username, userInfo) {
+    setUserInfo(username, userInfo,userAvatar) {
         this._userName.textContent = username;
         this._userInfo.textContent = userInfo;
+        this._userAvatar.src = userAvatar
       }
 }

@@ -9,7 +9,7 @@ export class Section {
     constructor({items, renderer}, containerSelector) {
         this._items = items; //массив карточек
         this._renderer = renderer; //функция создания и отрисовки карточек
-        this._container = containerSelector; //селектор контейнера, где будут находиться карточки
+        this._container = document.querySelector(containerSelector); //селектор контейнера, где будут находиться карточки
     }
 
     //добавление карточек в контейнер
@@ -18,8 +18,8 @@ export class Section {
     }
 
     //отрисовка всех карточек на странице
-    renderItems() { 
-        this._items.forEach((item) => {
+    renderItems(items) {
+        items.forEach((item) => {
             this._renderer(item);
         });
     }
