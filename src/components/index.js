@@ -41,11 +41,13 @@ const api = new Api(apiConfig);
 const newUser = new UserInfo({
   userName: ".profile__name",
   userInfo: ".profile__status",
+  userAvatar: ".profile__avatar",
+
 });
 
 Promise.all([api.getUser(), api.getInitialCards()])
   .then(([user, card]) => {
-    newUser.setUserInfo(user.name, user.about);
+    newUser.setUserInfo(user.name, user.about, user.avatar);
     //userId = user._id;
 
     card.reverse();
