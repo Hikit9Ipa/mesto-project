@@ -88,14 +88,14 @@ const apiConfig = {
 //   return Promise.reject(`Ошибка: ${res.status}`);
 // }
 
-export {
+// export {
   
-  Api
-};
+//   Api
+// };
 
 
 
-export default class Api {
+export class Api {
 
  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;

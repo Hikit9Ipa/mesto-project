@@ -32,34 +32,41 @@ import {
   firstValidateForm,
   setEventListeners,
 } from "./validate.js";
-import {
-  getUser,
-  getInitialCards,
-  editUser,
-  editAvatar,
-  apiAddNewCard,
-  Api,
-} from "./api.js";
-import {
-  UserInfo
-} from "./UserInfo.js";
-
+import {Api} from "./api.js";
+import {UserInfo} from "./UserInfo.js";
+import {Section} from "./Section.js";
 
 const api = new Api(apiConfig);
+
 const newUser = new UserInfo({
   userName: ".profile__name",
   userInfo: ".profile__status",
 });
+
 Promise.all([api.getUser(), api.getInitialCards()])
   .then(([user, card]) => {
     newUser.setUserInfo(user.name, user.about);
     //userId = user._id;
+
+    card.reverse();
+    cardList.renderItems(card);
+
    // profileName.textContent = user.name;
    // profileStatus.textContent = user.about;
    // profileAvatar.src = user.avatar;
   })
  // .then(() => newUser.setAvatarSight())
   .catch((err) => console.log(err));
+
+// Добавление готовых карточек на страницу
+const cardList = new Section({
+  items: [],
+  renderer: (items) => {
+      const card = createNewCard(items);
+      cardList.addItem(card);
+  }
+}, cardsContainer);
+
 // Promise.all([getUser(), getInitialCards()])
 //     .then(([user, card]) => {
 //   userId = user._id;
@@ -170,11 +177,4 @@ Promise.all([api.getUser(), api.getInitialCards()])
 //   console.log(err);
 // })
 
-// //Добавление готовых карточек на страницу
-// // const cardlist = new Section({
-// //   items: [],
-// //   renderer: (items) => {
-// //       const card = createNewCard(items);//createNewCard-функция создания экзепляра Card, название можно изменить)
-// //       cards.addItem(card);
-// //   }
-// // }, cardsContainer);
+
