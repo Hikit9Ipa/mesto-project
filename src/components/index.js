@@ -21,7 +21,8 @@ import {
   popupAvatar,
   avatarUrlinp,
   avatarSubmBtn,
-  apiConfig
+  apiConfig,
+  imgOpen
 } from "./variables.js";
 
 import { openPopup, closePopup, renderLoading } from "./modal.js";
@@ -75,14 +76,13 @@ const cardList = new Section({
 const createNewCard = (data) => {
   const card = new Card({data, userId,
     handleCardClick: () => {
-      console.log('big image');
+      console.log('big image')
     },
 
     handleDeleteCard: () => {
       api.deleteCard(card._id)
         .then(() => {
           card.deleteCard();
-          console.log('12')
         })
         .catch((err) => {
           console.log(err);

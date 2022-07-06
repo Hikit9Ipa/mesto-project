@@ -63,13 +63,12 @@ const enableValidationParams = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input_error_active",
 };
-let userId;
 const apiConfig = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-11",
   headers: {
     authorization: "5e97ff51-83fb-4a87-a9ba-ca3be6f4f066",
-    "Content-Type": "application/json",
-  },
+    "Content-Type": "application/json"
+  }
 };
 
 export {
@@ -103,7 +102,6 @@ export {
   ElementElement,
   avatarUrlinp,
   avatarSubmBtn,
-  userId,
   //initialCards
   apiConfig
 };

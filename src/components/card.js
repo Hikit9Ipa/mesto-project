@@ -60,13 +60,13 @@ export class Card {
     });
 
     this._cardImage.addEventListener('click', () => {
-        this._handleCardClick(this._title, this._link);
+        this._handleCardClick();
     });
   }
 
   //удаление карточки
   deleteCard = () => {
-    this._cardElement.remove();
+    this._cardElement.remove(); 
   }
 
    //сокрытие кнопки удаления не на своей карточке
@@ -78,8 +78,9 @@ export class Card {
   
   //находим наш лайк
   isLiked() {
-    return this._likes.find(like => like._id === this._userId);
+    return this._likes.find(user => user._id === this._userId);
   }
+  
   //если лайк наш, добавляем активный класс, иначе - удаляем его
   _checkLike() {
       this.isLiked() ? this.addLike() : this.deleteLike();
@@ -99,7 +100,6 @@ export class Card {
       this._likesCount.textContent = this._likes.length;
   }
 }
-
 
 
 // import {
