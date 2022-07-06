@@ -32,10 +32,12 @@ import {
   firstValidateForm,
   setEventListeners,
 } from "./validate.js";
-import {Api} from "./api.js";
-import {UserInfo} from "./UserInfo.js";
-import {Section} from "./Section.js";
-import {Card} from "./card.js";
+import Api from "./Api.js";
+import { UserInfo } from "./UserInfo.js";
+import { Section } from "./Section.js";
+import { Card } from "./card.js";
+
+import PopupWithForm from "./PopupWithForm.js";
 
 const api = new Api(apiConfig);
 
@@ -43,7 +45,6 @@ const newUser = new UserInfo({
   userName: ".profile__name",
   userInfo: ".profile__status",
   userAvatar: ".profile__avatar",
-
 });
 
 let userId = null;
@@ -57,61 +58,93 @@ Promise.all([api.getUser(), api.getInitialCards()])
     cards.reverse();
     cardList.renderItems(cards);
 
-   // profileName.textContent = user.name;
-   // profileStatus.textContent = user.about;
-   // profileAvatar.src = user.avatar;
+    // profileName.textContent = user.name;
+    // profileStatus.textContent = user.about;
+    // profileAvatar.src = user.avatar;
   })
- // .then(() => newUser.setAvatarSight())
+  // .then(() => newUser.setAvatarSight())
   .catch((err) => console.log(err));
 
-  // Добавление готовых карточек на страницу
-const cardList = new Section({
-  items: [],
-  renderer: (items) => {
+// Добавление готовых карточек на страницу
+const cardList = new Section(
+  {
+    items: [],
+    renderer: (items) => {
       const card = createNewCard(items);
       cardList.addItem(card);
-  }
-}, cardsContainer);
+    },
+  },
+  cardsContainer
+);
 
 const createNewCard = (data) => {
-  const card = new Card({data, userId,
-    handleCardClick: () => {
-      console.log('big image')
-    },
+  const card = new Card(
+    {
+      data,
+      userId,
+      handleCardClick: () => {
+        console.log("big image");
+      },
 
-    handleDeleteCard: () => {
-      api.deleteCard(card._id)
-        .then(() => {
-          card.deleteCard();
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-    },
-    handleLikeCard: () => {
-      if (card.isLiked()) {
-        api.dislikeCard(card._id)
-          .then((data) => {
-            card.deleteLike();
-            card.setLikeCount(data.likes);
+      handleDeleteCard: () => {
+        api
+          .deleteCard(card._id)
+          .then(() => {
+            card.deleteCard();
+            console.log("12");
           })
           .catch((err) => {
             console.log(err);
-          })
-      } else {
-        api.likeCard(card._id)
-          .then((data) => {
-            card.addLike();
-            card.setLikeCount(data.likes);
-          })
-          .catch((err) => {
-            console.log(err);
-          })
+          });
+      },
+      handleLikeCard: () => {
+        if (card.isLiked()) {
+          api
+            .dislikeCard(card._id)
+            .then((data) => {
+              card.deleteLike();
+              card.setLikeCount(data.likes);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          api
+            .likeCard(card._id)
+            .then((data) => {
+              card.addLike();
+              card.setLikeCount(data.likes);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
-    }
-  }, cardTemplate);
+      },
+    },
+    cardTemplate
+  );
   return card.createCard();
-}
+};
+
+const updateAvatarPopup = new PopupWithForm({
+  popupSelector: "#popup-update-avatar",
+  handleFormSubmit: (data) => {
+    api.setUserAvatar(data.link)
+      .then((res) => {
+        updateAvatarPopup.close();
+        newUser.setUserAvatar(res.avatar);
+      })
+      .catch((err) => console.log(err))
+  },
+});
+
+//открывает попап аватара
+profileAvatarBtn.addEventListener("click", function () {
+  updateAvatarPopup.open();
+  console.log("avatar");
+  //openPopup(popupAvatar);
+});
+
 
 // Promise.all([getUser(), getInitialCards()])
 //     .then(([user, card]) => {
@@ -222,5 +255,3 @@ const createNewCard = (data) => {
 // .catch((err) => {
 //   console.log(err);
 // })
-
-

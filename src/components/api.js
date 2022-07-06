@@ -90,7 +90,7 @@ import { renderLoading } from "./modal";
 
 
 
-export class Api {
+export default class Api {
 
  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -132,16 +132,29 @@ export class Api {
     }).then(this._checkResponse);
   }
 
+  // apiAddNewCard(data) {
+  //   return fetch(`${apiConfig.baseUrl}/cards`, {
+  //     method: "POST",
+  //     headers: this._headers,
+  //     body: JSON.stringify(data),
+  //   }).then(
+  //     this._checkResponse,
+  //     console.log("post")
+  //     );
+  // }
   apiAddNewCard(title, src) {
-    return fetch(`${this._baseUrl}/cards`, {
-      method: "POST",
-      headers: this._headers,
-      body: JSON.stringify({
-        name: title,
-        link: src,
-      }),
-    }).then(this._checkResponse);
-  }
+    return fetch (`${this._baseUrl}/cards`, {
+        method: 'POST',
+        headers: this.headers,
+        body: JSON.stringify ({
+          name: title,
+          link: src
+        })
+      })
+      .then (this._checkResponse)
+      console.log(title,src);
+    
+  };
 
   likeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
@@ -166,7 +179,8 @@ export class Api {
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
+      console.log(res.json());
     }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(`Ошибка: ${res.status},${res.statusTex}`);
   }
 }
