@@ -137,15 +137,15 @@ export class Api {
     }).then(this._checkResponse);
   }
 
-  apiAddNewCard(title, src) {
-    return fetch(`${this._baseUrl}/cards`, {
+  apiAddNewCard(data) {
+    return fetch(`${apiConfig.baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({
-        name: title,
-        link: src,
-      }),
-    }).then(this._checkResponse);
+      body: JSON.stringify(data),
+    }).then(
+      this._checkResponse,
+      console.log("post")
+      );
   }
 
   likeCard(cardId) {
@@ -172,6 +172,6 @@ export class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(`Ошибка: ${res.status},${res.statusTex}`);
   }
 }
