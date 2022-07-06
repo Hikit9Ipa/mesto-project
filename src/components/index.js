@@ -22,7 +22,7 @@ import {
   avatarUrlinp,
   avatarSubmBtn,
   apiConfig,
-  imgOpen
+  imgOpen,
 } from "./variables.js";
 
 import { openPopup, closePopup, renderLoading } from "./modal.js";
@@ -33,10 +33,10 @@ import {
   setEventListeners,
 } from "./validate.js";
 import Api from "./Api.js";
-import { UserInfo } from "./UserInfo.js";
+import UserInfo from "./UserInfo.js";
 import { Section } from "./Section.js";
 import { Card } from "./Card.js";
-import {FormValidator} from "./FormValidator.js";
+import { FormValidator } from "./FormValidator.js";
 import PopupWithForm from "./PopupWithForm.js";
 
 const api = new Api(apiConfig);
@@ -78,13 +78,17 @@ const cardList = new Section(
 );
 
 const createNewCard = (data) => {
-  const card = new Card({data, userId,
+  const card = new Card(
+    {
+      data,
+      userId,
       handleCardClick: () => {
         console.log("big image");
       },
 
       handleDeleteCard: () => {
-        api.deleteCard(card._id)
+        api
+          .deleteCard(card._id)
           .then(() => {
             card.deleteCard();
           })
@@ -94,7 +98,8 @@ const createNewCard = (data) => {
       },
       handleLikeCard: () => {
         if (card.isLiked()) {
-          api.dislikeCard(card._id)
+          api
+            .dislikeCard(card._id)
             .then((data) => {
               card.deleteLike();
               card.setLikeCount(data.likes);
@@ -103,7 +108,8 @@ const createNewCard = (data) => {
               console.log(err);
             });
         } else {
-          api.likeCard(card._id)
+          api
+            .likeCard(card._id)
             .then((data) => {
               card.addLike();
               card.setLikeCount(data.likes);
@@ -119,15 +125,15 @@ const createNewCard = (data) => {
   return card.createCard();
 };
 
-const updateAvatarPopup = new PopupWithForm({
-  popupSelector: "#popup-update-avatar",
+//api.editAvatar("https://pibig.info/uploads/posts/2021-05/1621348484_47-pibig_info-p-ostrov-vrangelya-priroda-krasivo-foto-57.jpg");
+const updateAvatarPopup = new PopupWithForm(popupAvatar, {
   handleFormSubmit: (data) => {
-    api.setUserAvatar(data.link)
-      .then((res) => {
-        updateAvatarPopup.close();
-        newUser.setUserAvatar(res.avatar);
+    api
+      .editAvatar(data)
+      .then((data) => {
+        newUser.setUserInfo(data);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   },
 });
 
@@ -138,6 +144,47 @@ profileAvatarBtn.addEventListener("click", function () {
   //openPopup(popupAvatar);
 });
 
+const updateProfilePopup = new PopupWithForm(popupProfile, {
+  handleFormSubmit: (data) => {
+    api.editUser(data)
+      // .then((data) => {
+      //   newUser.setUserInfo(data);
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
+  },
+});
+//открывает попап профиля
+profileEditBtn.addEventListener("click", function () {
+  updateProfilePopup.open();
+  console.log("profile");
+});
+
+const addNewCardPopup = new PopupWithForm(popupCard, {
+  handleFormSubmit: (data) => {
+   
+      // .then((data) => {
+      //   newUser.setUserInfo(data);
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
+  },
+});
+addNewCardBtn.addEventListener("click", () =>{
+  cardNameInput.value= '';
+  cardSrcInput.value = '';
+  addNewCardPopup.open()
+  });
+
+
+
+
+  //обработчик открытия профиля
+  //nameInput.value = profileName.textContent;
+  //jobInput.value = profileStatus.textContent;
+  //popupProfile.open();
 
 // Promise.all([getUser(), getInitialCards()])
 //     .then(([user, card]) => {

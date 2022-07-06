@@ -5,6 +5,7 @@ import {
   profileAvatar,
   profileBtnSubmit,
   avatarSubmBtn,
+  avatarUrlinp
 } from "./variables.js";
 import { initialCards } from "./Card.js";
 import { renderLoading } from "./modal";
@@ -110,15 +111,15 @@ export default class Api {
     }).then(this._checkResponse);
   }
   //редактирование аватара
-  editAvatar(avatar) {
+  editAvatar() {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatar,
-      }),
-    }).then(this._checkResponse);
-  }
+        avatar: avatarUrlinp.value,
+      })
+    }).then(this._checkResponse)
+  };
 
   //редактированиt профиля
   editUser(nameInput, profileStatus) {
@@ -126,8 +127,8 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: nameInput,
-        about: profileStatus,
+        name: nameInput.value,
+        about: profileStatus.value,
       }),
     }).then(this._checkResponse);
   }
@@ -179,7 +180,7 @@ export default class Api {
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
-      console.log(res.json());
+      //console.log(res.json());
     }
     return Promise.reject(`Ошибка: ${res.status},${res.statusTex}`);
   }

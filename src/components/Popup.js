@@ -3,32 +3,31 @@
 // Содержит публичные методы open и close, которые отвечают за открытие и закрытие попапа.
 // Содержит приватный метод _handleEscClose, который содержит логику закрытия попапа клавишей Esc.
 // Содержит публичный метод setEventListeners, который добавляет слушатель клика иконке закрытия попапа. Модальное окно также закрывается при клике на затемнённую область вокруг формы.
-export class Popup {
+export default class Popup {
   constructor(popupSelector) {
-    this._popup = document.querySelector(popupSelector);
-    this._closeButton = this._popup.querySelector(".popup__close");
-    this.setEventListeners();
+    this._popupSelector = popupSelector;
+    this._closePopupEsc = (evt) => this._handleEscClose(evt);
   }
   open() {
-    this._popup.classList.add("popup_opened");
-    document.addEventListener("keydown", this._handleEscClose);
+    this._popupSelector.classList.add("popup_opened");
+    this.setEventListeners();
   }
   close() {
-    this._popup.classList.remove("popup_opened");
-    document.removeEventListener("keydown", this._handleEscClose);
+    this._popupSelector.classList.remove("popup_opened");
+    document.removeEventListener("keydown", this._closePopupEsc);
   }
   _handleEscClose = (evt) => {
     if (evt.key === "Escape") {
       this.close();
     }
   };
-  _handleOverlayClose = (evt) => {
-    if (evt.target.classList.contains("popup")) {
-      this.close();
-    }
-  };
+  
   setEventListeners() {
-    this._closeButton.addEventListener("click", () => this.close());
+    this._popupSelector.addEventListener("click", (evt) => {
+      if (evt.target.classList.contains("popup_opened") || evt.target.classList.contains("popup__close")) {
+       this.close();
+      }
+    });
+    document.addEventListener("keydown", this._closePopupEsc);
   }
 }
-

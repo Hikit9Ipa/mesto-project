@@ -5,7 +5,7 @@
 
 //import { data } from "jquery";
 
-export class UserInfo{
+export default class  UserInfo{
     constructor({userName,userInfo,userAvatar}){
         this._userName = document.querySelector(userName);
         this._userInfo = document.querySelector(userInfo);

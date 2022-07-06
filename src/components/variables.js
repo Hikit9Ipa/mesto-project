@@ -25,7 +25,7 @@
 //   },
 // ];
 const popupClosebtns = document.querySelectorAll(".popup__close");
-const profileEditBtn = document.querySelector(".profile__edit-btn");
+const profileEditBtn = document.querySelector("#prifile-edit-btn");
 const profileAvatarBtn = document.querySelector(
   "#profile__avatar-update-button"
 ); //кнопка редактирования профиля
