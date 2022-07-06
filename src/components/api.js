@@ -9,13 +9,13 @@ import {
 import { initialCards } from "./card.js";
 import { renderLoading } from "./modal";
 
-const apiConfig = {
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-11",
-  headers: {
-    authorization: "5e97ff51-83fb-4a87-a9ba-ca3be6f4f066",
-    "Content-Type": "application/json",
-  },
-};
+// const apiConfig = {
+//   baseUrl: "https://nomoreparties.co/v1/plus-cohort-11",
+//   headers: {
+//     authorization: "5e97ff51-83fb-4a87-a9ba-ca3be6f4f066",
+//     "Content-Type": "application/json",
+//   },
+// };
 
 // function getUser() {
 //   return fetch(`${apiConfig.baseUrl}/users/me`, {
@@ -88,11 +88,6 @@ const apiConfig = {
 //   return Promise.reject(`Ошибка: ${res.status}`);
 // }
 
-// export {
-  
-//   Api
-// };
-
 
 
 export class Api {
@@ -158,13 +153,13 @@ export class Api {
   dislikeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
-      headers: this.headers,
+      headers: this._headers,
     }).then(this._checkResponse);
   }
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: this.headers,
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 
