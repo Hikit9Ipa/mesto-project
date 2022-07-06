@@ -69,8 +69,7 @@ const apiConfig = {
   headers: {
     authorization: "5e97ff51-83fb-4a87-a9ba-ca3be6f4f066",
     "Content-Type": "application/json",
-  },
-};
+  },}
 
 export {
   popupClosebtns,

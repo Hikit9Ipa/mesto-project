@@ -31,7 +31,7 @@ import {
   firstValidateForm,
   setEventListeners,
 } from "./validate.js";
-import { Api } from "./api.js";
+import Api from "./Api.js";
 import { UserInfo } from "./UserInfo.js";
 import { Section } from "./Section.js";
 import { Card } from "./card.js";
@@ -125,35 +125,25 @@ const createNewCard = (data) => {
   return card.createCard();
 };
 
-// const addPosrCard = new PopupWithForm({
-//   popupSelector: "#popup-card",
-//   handleFormSubmit: (data) => {
-//     addPostCard.renderLoadingStatus(true, "Сохранить...");
-//     api
-//       .addCard(data)
-//       .then((data) => {
-//         const newCard = createNewCard(data);
-//         cardList.addItem(newPostcard);
-//         addCard.close();
-//       })
-//       .catch((err) => console.log(err))
-//       .finally(() => addPostcard.renderLoadingStatus(false));
-//   },
-// });
-api.apiAddNewCard({cardname:"test123",cardsrc:"http://www.vodoobmen.ru/images/kachestvo-vody-v-xakasii-2.jpg"});
-
-const addPostCard = new PopupWithForm({
-  popupSelector: "#popup-card",
-  handleFormSubmit: (data) => { console.log(data);
-  }
+const updateAvatarPopup = new PopupWithForm({
+  popupSelector: "#popup-update-avatar",
+  handleFormSubmit: (data) => {
+    api.setUserAvatar(data.link)
+      .then((res) => {
+        updateAvatarPopup.close();
+        newUser.setUserAvatar(res.avatar);
+      })
+      .catch((err) => console.log(err))
+  },
 });
 
-addNewCardBtn.addEventListener("click", () => {
-  addPostCard.open();
-  cardNameInput.value= '';
-  cardSrcInput.value = '';
-  //postcardFormValidator.resetValidation();
+//открывает попап аватара
+profileAvatarBtn.addEventListener("click", function () {
+  updateAvatarPopup.open();
+  console.log("avatar");
+  //openPopup(popupAvatar);
 });
+
 
 // Promise.all([getUser(), getInitialCards()])
 //     .then(([user, card]) => {
