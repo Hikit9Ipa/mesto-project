@@ -6,7 +6,7 @@ import {
   profileBtnSubmit,
   avatarSubmBtn,
 } from "./variables.js";
-import { initialCards } from "./card.js";
+import { initialCards } from "./Card.js";
 import { renderLoading } from "./modal";
 
 // const apiConfig = {

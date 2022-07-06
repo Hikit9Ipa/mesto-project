@@ -26,7 +26,7 @@ import {
 } from "./variables.js";
 
 import { openPopup, closePopup, renderLoading } from "./modal.js";
-import { createCard, renderCard, initialCards } from "./card.js";
+import { createCard, renderCard, initialCards } from "./Card.js";
 import {
   enableValidation,
   firstValidateForm,
@@ -35,8 +35,8 @@ import {
 import Api from "./Api.js";
 import { UserInfo } from "./UserInfo.js";
 import { Section } from "./Section.js";
-import { Card } from "./card.js";
-
+import { Card } from "./Card.js";
+import {FormValidator} from "./FormValidator.js";
 import PopupWithForm from "./PopupWithForm.js";
 
 const api = new Api(apiConfig);
@@ -78,20 +78,15 @@ const cardList = new Section(
 );
 
 const createNewCard = (data) => {
-  const card = new Card(
-    {
-      data,
-      userId,
+  const card = new Card({data, userId,
       handleCardClick: () => {
         console.log("big image");
       },
 
       handleDeleteCard: () => {
-        api
-          .deleteCard(card._id)
+        api.deleteCard(card._id)
           .then(() => {
             card.deleteCard();
-            console.log("12");
           })
           .catch((err) => {
             console.log(err);
@@ -99,8 +94,7 @@ const createNewCard = (data) => {
       },
       handleLikeCard: () => {
         if (card.isLiked()) {
-          api
-            .dislikeCard(card._id)
+          api.dislikeCard(card._id)
             .then((data) => {
               card.deleteLike();
               card.setLikeCount(data.likes);
@@ -109,8 +103,7 @@ const createNewCard = (data) => {
               console.log(err);
             });
         } else {
-          api
-            .likeCard(card._id)
+          api.likeCard(card._id)
             .then((data) => {
               card.addLike();
               card.setLikeCount(data.likes);
