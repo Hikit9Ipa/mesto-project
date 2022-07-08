@@ -121,6 +121,17 @@ const createNewCard = (data) => {
   return card.createCard();
 };
 
+//валидация
+
+const profileValidator = new FormValidator(enableValidationParams, popupProfile);
+profileValidator.enableValidation();
+
+const addNewCardValidator = new FormValidator(enableValidationParams, popupCard);
+addNewCardValidator.enableValidation();
+
+const avatarValidator = new FormValidator(enableValidationParams, popupAvatar);
+avatarValidator.enableValidation();
+
 //api.editAvatar("https://pibig.info/uploads/posts/2021-05/1621348484_47-pibig_info-p-ostrov-vrangelya-priroda-krasivo-foto-57.jpg");
 const updateAvatarPopup = new PopupWithForm(popupAvatar, {
   handleFormSubmit: (data) => {
@@ -137,6 +148,9 @@ const updateAvatarPopup = new PopupWithForm(popupAvatar, {
 profileAvatarBtn.addEventListener("click", function () {
   updateAvatarPopup.open();
   console.log("avatar");
+
+  avatarValidator.toggleButtonState();
+  avatarValidator.resetValidation();
   //openPopup(popupAvatar);
 });
 
@@ -155,6 +169,8 @@ const updateProfilePopup = new PopupWithForm(popupProfile, {
 profileEditBtn.addEventListener("click", function () {
   updateProfilePopup.open();
   console.log("profile");
+  profileValidator.toggleButtonState();
+  profileValidator.resetValidation();
 });
 
 const addNewCardPopup = new PopupWithForm(popupCard, {
