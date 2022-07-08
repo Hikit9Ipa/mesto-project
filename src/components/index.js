@@ -42,21 +42,21 @@ import PopupWithForm from "./PopupWithForm.js";
 const api = new Api(apiConfig);
 
 const newUser = new UserInfo({profileName, profileStatus, profileAvatar});
-console.log(profileAvatar);
-console.log(profileAvatar.src);
+//console.log(profileAvatar);
+//console.log(profileAvatar.src);
 let userId = null;
 
 Promise.all([api.getUser(), api.getInitialCards()])
   .then(([user, cards]) => {
     userId = user._id;
-    newUser.setUserInfo(user);
+    //newUser.setUserInfo(user);
 
     cards.reverse();
     cardList.renderItems(cards);
 
-    //profileName.textContent = user.name;
-    //profileStatus.textContent = user.name;
-    //profileAvatar.src = user.avatar; //Работает
+    profileName.textContent = user.name;
+    profileStatus.textContent = user.name;
+    profileAvatar.src = user.avatar; //Работает
   })
   // .then(() => newUser.setAvatarSight())
   .catch((err) => console.log(err));
@@ -168,6 +168,8 @@ const updateProfilePopup = new PopupWithForm(popupProfile, {
 //открывает попап профиля
 profileEditBtn.addEventListener("click", function () {
   updateProfilePopup.open();
+  nameInput.value =  profileName.textContent;
+  jobInput.value = profileStatus.textContent;
   console.log("profile");
   profileValidator.toggleButtonState();
   profileValidator.resetValidation();
