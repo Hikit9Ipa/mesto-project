@@ -6,24 +6,31 @@
 //import { data } from "jquery";
 
 export default class  UserInfo{
-    constructor({userName,userInfo,userAvatar}){
-        this._userName = document.querySelector(userName);
-        this._userInfo = document.querySelector(userInfo);
-        this._userAvatar = document.querySelector(userAvatar);
-
-
+    constructor({userName,userInfo,userAvatar})
+    {
+        this._userName = userName;
+        this._userInfo = userInfo;
+        this._userAvatar = userAvatar;
+        console.log("this._userAvatar");
+        console.log(this._userAvatar);
+        console.log("this._userAvatar");
     }
     getUserInfo(){
-
-        return {
-            userName: this._userName.textContent,
-            userInfo: this._userInfo.textContent,
-            userAvatar:this._userAvatar.src
+        const userinfo ={
+            name: this._userName.textContent,
+            about: this._userInfo.textContent,
+            avatar:this._userAvatar.src
         };
+        return userinfo;
     }
-    setUserInfo(username, userInfo,userAvatar) {
-        this._userName.textContent = username;
-        this._userInfo.textContent = userInfo;
-        this._userAvatar.src = userAvatar
+    setUserInfo(data) {
+       // console.log("setUserInfo");
+       // console.log(data.name);
+        //console.log(data.about);
+        //console.log(data.avatar);
+       // console.log("setUserInfo");
+       //this._userName = data.name;
+       //this._userInfo = data.about;
+        //this._userAvatar.src = data.avatar;
       }
 }

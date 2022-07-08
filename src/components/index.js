@@ -41,26 +41,22 @@ import PopupWithForm from "./PopupWithForm.js";
 
 const api = new Api(apiConfig);
 
-const newUser = new UserInfo({
-  userName: ".profile__name",
-  userInfo: ".profile__status",
-  userAvatar: ".profile__avatar",
-});
-
+const newUser = new UserInfo({profileName, profileStatus, profileAvatar});
+console.log(profileAvatar);
+console.log(profileAvatar.src);
 let userId = null;
 
 Promise.all([api.getUser(), api.getInitialCards()])
   .then(([user, cards]) => {
     userId = user._id;
-
-    newUser.setUserInfo(user.name, user.about, user.avatar);
+    newUser.setUserInfo(user);
 
     cards.reverse();
     cardList.renderItems(cards);
 
-    // profileName.textContent = user.name;
-    // profileStatus.textContent = user.about;
-    // profileAvatar.src = user.avatar;
+    //profileName.textContent = user.name;
+    //profileStatus.textContent = user.name;
+    //profileAvatar.src = user.avatar; //Работает
   })
   // .then(() => newUser.setAvatarSight())
   .catch((err) => console.log(err));
@@ -147,12 +143,12 @@ profileAvatarBtn.addEventListener("click", function () {
 const updateProfilePopup = new PopupWithForm(popupProfile, {
   handleFormSubmit: (data) => {
     api.editUser(data)
-      // .then((data) => {
-      //   newUser.setUserInfo(data);
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
+    .then((data) => {
+    newUser.setUserInfo(data);
+    })
+    .catch((err) => {
+    console.log(err);
+    });
   },
 });
 //открывает попап профиля
@@ -163,28 +159,25 @@ profileEditBtn.addEventListener("click", function () {
 
 const addNewCardPopup = new PopupWithForm(popupCard, {
   handleFormSubmit: (data) => {
-   
-      // .then((data) => {
-      //   newUser.setUserInfo(data);
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
+    // .then((data) => {
+    //   newUser.setUserInfo(data);
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });
   },
 });
-addNewCardBtn.addEventListener("click", () =>{
-  cardNameInput.value= '';
-  cardSrcInput.value = '';
-  addNewCardPopup.open()
-  });
 
+addNewCardBtn.addEventListener("click", () => {
+  cardNameInput.value = "";
+  cardSrcInput.value = "";
+  addNewCardPopup.open();
+});
 
-
-
-  //обработчик открытия профиля
-  //nameInput.value = profileName.textContent;
-  //jobInput.value = profileStatus.textContent;
-  //popupProfile.open();
+//обработчик открытия профиля
+//nameInput.value = profileName.textContent;
+//jobInput.value = profileStatus.textContent;
+//popupProfile.open();
 
 // Promise.all([getUser(), getInitialCards()])
 //     .then(([user, card]) => {
