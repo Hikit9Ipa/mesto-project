@@ -6,9 +6,9 @@
 export default class  UserInfo{
     constructor({userName,userInfo,userAvatar})
     {
-        this._userName = userName;
-        this._userInfo = userInfo;
-        this._userAvatar = userAvatar;
+        this._userName = document.querySelector(userName);
+        this._userInfo = document.querySelector(userInfo);
+        this._userAvatar = document.querySelector(userAvatar);
        // console.log("this._userAvatar");
        // console.log(this._userAvatar);
         //console.log("this._userAvatar");
@@ -27,8 +27,12 @@ export default class  UserInfo{
         //console.log(data.about);
         //console.log(data.avatar);
        // console.log("setUserInfo");
-       this._userName = data.name;
-       this._userInfo = data.about;
+       //this._userName = data.name;
+       //this._userInfo = data.about;
         this._userAvatar.src = data.avatar;
+      }
+      setUserAvatar(data){
+        this._userAvatar.src = data.avatar;
+
       }
 }

@@ -41,7 +41,11 @@ import PopupWithForm from "./PopupWithForm.js";
 
 const api = new Api(apiConfig);
 
-const newUser = new UserInfo({profileName, profileStatus, profileAvatar});
+const newUser = new UserInfo({
+  userName: ".profile__name",
+  userInfo: ".profile__status",
+  userAvatar: "profile__avatar",
+});
 //console.log(profileAvatar);
 //console.log(profileAvatar.src);
 let userId = null;
@@ -49,16 +53,16 @@ let userId = null;
 Promise.all([api.getUser(), api.getInitialCards()])
   .then(([user, cards]) => {
     userId = user._id;
-    //newUser.setUserInfo(user);
-
+   // newUser.setUserInfo(user);
+   newUser.setUserAvatar(user.avatar);
     cards.reverse();
     cardList.renderItems(cards);
 
-    profileName.textContent = user.name;
-    profileStatus.textContent = user.name;
-    profileAvatar.src = user.avatar; //Работает
+   // profileName.textContent = user.name;
+    //profileStatus.textContent = user.about;
+    //profileAvatar.src = user.avatar; //Работает
   })
-  // .then(() => newUser.setAvatarSight())
+  
   .catch((err) => console.log(err));
 
 // Добавление готовых карточек на страницу
@@ -123,10 +127,16 @@ const createNewCard = (data) => {
 
 //валидация
 
-const profileValidator = new FormValidator(enableValidationParams, popupProfile);
+const profileValidator = new FormValidator(
+  enableValidationParams,
+  popupProfile
+);
 profileValidator.enableValidation();
 
-const addNewCardValidator = new FormValidator(enableValidationParams, popupCard);
+const addNewCardValidator = new FormValidator(
+  enableValidationParams,
+  popupCard
+);
 addNewCardValidator.enableValidation();
 
 const avatarValidator = new FormValidator(enableValidationParams, popupAvatar);
@@ -156,19 +166,20 @@ profileAvatarBtn.addEventListener("click", function () {
 
 const updateProfilePopup = new PopupWithForm(popupProfile, {
   handleFormSubmit: (data) => {
-    api.editUser(data)
-    .then((data) => {
-    newUser.setUserInfo(data);
-    })
-    .catch((err) => {
-    console.log(err);
-    });
+    api
+      .editUser(data)
+      .then((data) => {
+        newUser.setUserInfo(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 });
 //открывает попап профиля
 profileEditBtn.addEventListener("click", function () {
   updateProfilePopup.open();
-  nameInput.value =  profileName.textContent;
+  nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
   console.log("profile");
   profileValidator.toggleButtonState();
