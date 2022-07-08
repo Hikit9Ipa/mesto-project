@@ -61,7 +61,7 @@ const enableValidationParams = {
   submitButtonSelector: ".popup__submit",
   inactiveButtonClass: "popup__submit_inactive",
   inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input_error_active",
+  errorClass: "popup__error_active",
 };
 const apiConfig = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-11",
