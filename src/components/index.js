@@ -38,6 +38,7 @@ import { Section } from "./Section.js";
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 import {PopupWithForm} from "./PopupWithForm.js";
+import {PopupWithImage} from "./PopupWithImage.js";
 
 const api = new Api(apiConfig);
 
@@ -79,7 +80,8 @@ const createNewCard = (data) => {
       data,
       userId,
       handleCardClick: () => {
-        console.log("big image");
+        const popupOpenImage = new PopupWithImage(imgOpen, data);
+        popupOpenImage.open();
       },
 
       handleDeleteCard: () => {
