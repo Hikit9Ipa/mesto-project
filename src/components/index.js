@@ -138,30 +138,29 @@ addNewCardValidator.enableValidation();
 const avatarValidator = new FormValidator(enableValidationParams, popupAvatar);
 avatarValidator.enableValidation();
 
-//api.editAvatar("https://pibig.info/uploads/posts/2021-05/1621348484_47-pibig_info-p-ostrov-vrangelya-priroda-krasivo-foto-57.jpg");
 const updateAvatarPopup = new PopupWithForm(popupAvatar, {
   handleFormSubmit: (data) => {
-    //updateAvatarPopup.renderLoadingStatus(true)
-    api
-      .editAvatar(data)
+    updateAvatarPopup.renderLoadingStatus(true)
+    api.editAvatar(data)
       .then((data) => {
         newUser.setUserAvatar(data);
         updateAvatarPopup.close()
       })
       .catch((err) => console.log(err))
-   //   .finally(()=>updateAvatarPopup.renderLoadingStatus(false))
-      
-  },
-});
+      .finally(() => {
+        updateAvatarPopup.renderLoading(false);
+    })   
+  }
+})
+
+updateAvatarPopup.setEventListeners();
 
 //открывает попап аватара
 profileAvatarBtn.addEventListener("click", function () {
   updateAvatarPopup.open();
-  //console.log("avatar");
 
   avatarValidator.toggleButtonState();
   avatarValidator.resetValidation();
-  //openPopup(popupAvatar);
 });
 
 
@@ -181,6 +180,8 @@ const updateProfilePopup = new PopupWithForm(popupProfile, {
       })
   },
 });
+
+updateProfilePopup.setEventListeners();
 
 //открывает попап профиля
 profileEditBtn.addEventListener("click", function () {
@@ -210,6 +211,8 @@ const addNewCardPopup = new PopupWithForm(popupCard, {
         })
 }
 });
+
+addNewCardPopup.setEventListeners();
 
 addNewCardBtn.addEventListener("click", () => {
   addNewCardPopup.open();

@@ -32,24 +32,24 @@ export class Api {
     }).then(this._checkResponse);
   }
   //редактирование аватара
-  editAvatar() {
+  editAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatarUrlinp.value,
+        avatar: avatarUrlinp.value
       })
     }).then(this._checkResponse)
   };
 
   //редактированиt профиля
-  editUser() {
+  editUser(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: nameInput.value,
-        about: jobInput.value,
+        about: jobInput.value
       }),
     }).then(this._checkResponse);
   }
@@ -59,7 +59,7 @@ export class Api {
         method: 'POST',
         headers: this._headers,
         body: JSON.stringify({
-            name: cardNameInput.value,
+          name: cardNameInput.value,
             link: cardSrcInput.value
         })
     }) .then(this._checkResponse); 
