@@ -145,11 +145,11 @@ const updateAvatarPopup = new PopupWithForm(popupAvatar, {
     api
       .editAvatar(data)
       .then((data) => {
-        newUser.setUserInfo(data);
+        newUser.setUserAvatar(data);
         updateAvatarPopup.close()
       })
       .catch((err) => console.log(err))
-      .finally(()=>updateAvatarPopup.renderLoadingStatus(false))
+   //   .finally(()=>updateAvatarPopup.renderLoadingStatus(false))
       
   },
 });
