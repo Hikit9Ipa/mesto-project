@@ -182,18 +182,17 @@ const updateProfilePopup = new PopupWithForm(popupProfile, {
   },
 });
 
-updateProfilePopup.setEventListeners();
-
 //открывает попап профиля
 profileEditBtn.addEventListener("click", function () {
   updateProfilePopup.open();
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
-  console.log("profile");
+  
   profileValidator.toggleButtonState();
   profileValidator.resetValidation();
 });
 
+//Добавление новой карточки
 const addNewCardPopup = new PopupWithForm(popupCard, {
   handleFormSubmit: (data) => {
     addNewCardPopup.renderLoadingStatus(true);
@@ -211,8 +210,6 @@ const addNewCardPopup = new PopupWithForm(popupCard, {
         })
 }
 });
-
-addNewCardPopup.setEventListeners();
 
 addNewCardBtn.addEventListener("click", () => {
   addNewCardPopup.open();

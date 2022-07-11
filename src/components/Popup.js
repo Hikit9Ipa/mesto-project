@@ -3,7 +3,7 @@
 // Содержит публичные методы open и close, которые отвечают за открытие и закрытие попапа.
 // Содержит приватный метод _handleEscClose, который содержит логику закрытия попапа клавишей Esc.
 // Содержит публичный метод setEventListeners, который добавляет слушатель клика иконке закрытия попапа. Модальное окно также закрывается при клике на затемнённую область вокруг формы.
-export default class Popup {
+export class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
     this._closePopupEsc = (evt) => this._handleEscClose(evt);

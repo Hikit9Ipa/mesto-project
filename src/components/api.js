@@ -3,8 +3,8 @@ import {
   profileName,
   profileStatus,
   profileAvatar,
-  profileBtnSubmit,
-  avatarSubmBtn,
+  cardSrcInput,
+  cardNameInput,
   avatarUrlinp,
   nameInput,
   jobInput,
@@ -59,11 +59,10 @@ export class Api {
         method: 'POST',
         headers: this._headers,
         body: JSON.stringify({
-            name: data.name,
-            link: data.link
+            name: cardNameInput.value,
+            link: cardSrcInput.value
         })
-    })
-      .then (this._checkResponse); 
+    }) .then(this._checkResponse); 
   }
 
   likeCard(cardId) {

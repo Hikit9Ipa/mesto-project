@@ -73,6 +73,7 @@ export class Card {
   _hideDeleteButton() {
     if (this._ownerId !== this._userId) {
         this._buttonDelete.remove();
+        console.log('1')
     }
   }
   
