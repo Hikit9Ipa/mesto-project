@@ -44,26 +44,21 @@ const api = new Api(apiConfig);
 const newUser = new UserInfo({
   userName: ".profile__name",
   userInfo: ".profile__status",
-  userAvatar: "profile__avatar",
+  userAvatar: ".profile__avatar",
 });
-//console.log(profileAvatar);
-//console.log(profileAvatar.src);
 let userId = null;
 
 Promise.all([api.getUser(), api.getInitialCards()])
   .then(([user, cards]) => {
     userId = user._id;
-   // newUser.setUserInfo(user);
-   newUser.setUserAvatar(user.avatar);
+   newUser.setUserInfo(user);
+   newUser.setUserAvatar(user);
     cards.reverse();
     cardList.renderItems(cards);
-
-   // profileName.textContent = user.name;
-    //profileStatus.textContent = user.about;
-    //profileAvatar.src = user.avatar; //Работает
   })
-  
   .catch((err) => console.log(err));
+  
+  
 
 // Добавление готовых карточек на страницу
 const cardList = new Section(
@@ -145,35 +140,41 @@ avatarValidator.enableValidation();
 //api.editAvatar("https://pibig.info/uploads/posts/2021-05/1621348484_47-pibig_info-p-ostrov-vrangelya-priroda-krasivo-foto-57.jpg");
 const updateAvatarPopup = new PopupWithForm(popupAvatar, {
   handleFormSubmit: (data) => {
+    //updateAvatarPopup.renderLoadingStatus(true)
     api
       .editAvatar(data)
       .then((data) => {
         newUser.setUserInfo(data);
+        updateAvatarPopup.close()
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(()=>updateAvatarPopup.renderLoadingStatus(false))
+      
   },
 });
 
 //открывает попап аватара
 profileAvatarBtn.addEventListener("click", function () {
   updateAvatarPopup.open();
-  console.log("avatar");
+  //console.log("avatar");
 
   avatarValidator.toggleButtonState();
   avatarValidator.resetValidation();
   //openPopup(popupAvatar);
 });
 
+
 const updateProfilePopup = new PopupWithForm(popupProfile, {
   handleFormSubmit: (data) => {
-    api
-      .editUser(data)
-      .then((data) => {
-        newUser.setUserInfo(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    console.log(data)
+    console.log(" upd prof data")
+
+    api.editUser(data)
+      newUser.getUserInfo(data);
+      updateProfilePopup.close()
+   .catch((err) => {
+         console.log(err);
+       });
   },
 });
 //открывает попап профиля

@@ -5,7 +5,9 @@ import {
   profileAvatar,
   profileBtnSubmit,
   avatarSubmBtn,
-  avatarUrlinp
+  avatarUrlinp,
+  nameInput,
+  jobInput,
 } from "./variables.js";
 import { initialCards } from "./Card.js";
 import { renderLoading } from "./modal";
@@ -122,13 +124,13 @@ export default class Api {
   };
 
   //редактированиt профиля
-  editUser(nameInput, profileStatus) {
+  editUser() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: nameInput.value,
-        about: profileStatus.value,
+        about: jobInput.value,
       }),
     }).then(this._checkResponse);
   }

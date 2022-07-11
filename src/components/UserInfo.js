@@ -9,30 +9,19 @@ export default class  UserInfo{
         this._userName = document.querySelector(userName);
         this._userInfo = document.querySelector(userInfo);
         this._userAvatar = document.querySelector(userAvatar);
-       // console.log("this._userAvatar");
-       // console.log(this._userAvatar);
-        //console.log("this._userAvatar");
     }
     getUserInfo(){
-        const userinfo ={
+        this._user ={
             name: this._userName.textContent,
             about: this._userInfo.textContent,
-            avatar:this._userAvatar.src
-        };
-        return userinfo;
+        }
+        return this._user;
     }
     setUserInfo(data) {
-       // console.log("setUserInfo");
-       // console.log(data.name);
-        //console.log(data.about);
-        //console.log(data.avatar);
-       // console.log("setUserInfo");
-       //this._userName = data.name;
-       //this._userInfo = data.about;
+       this._userName.textContent = data.name;
+       this._userInfo.textContent = data.about;
+    }
+      setUserAvatar(data) {
         this._userAvatar.src = data.avatar;
-      }
-      setUserAvatar(data){
-        this._userAvatar.src = data.avatar;
-
       }
 }
