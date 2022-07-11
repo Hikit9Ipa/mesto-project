@@ -60,20 +60,20 @@ export class Card {
     });
 
     this._cardImage.addEventListener('click', () => {
-        this._handleCardClick();
+        this._handleCardClick(this._title, this._link);
     });
   }
 
   //удаление карточки
   deleteCard = () => {
     this._cardElement.remove(); 
+    this._cardElement = null;
   }
 
    //сокрытие кнопки удаления не на своей карточке
   _hideDeleteButton() {
     if (this._ownerId !== this._userId) {
         this._buttonDelete.remove();
-        console.log('1')
     }
   }
   
