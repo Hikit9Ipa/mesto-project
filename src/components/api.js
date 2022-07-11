@@ -122,14 +122,14 @@ export default class Api {
   };
 
   //редактированиt профиля
-  editUser(nameInput, profileStatus) {
+  editUser(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: nameInput.value,
-        about: profileStatus.value,
-      }),
+        name: data.name,
+        about: data.about
+      })
     }).then(this._checkResponse);
   }
 
@@ -143,19 +143,17 @@ export default class Api {
   //     console.log("post")
   //     );
   // }
-  apiAddNewCard(title, src) {
+  apiAddNewCard(data) {
     return fetch (`${this._baseUrl}/cards`, {
         method: 'POST',
-        headers: this.headers,
+        headers: this._headers,
         body: JSON.stringify ({
-          name: title,
-          link: src
+          name: data.name,
+          link: data.link
         })
       })
-      .then (this._checkResponse)
-      console.log(title,src);
-    
-  };
+      .then (this._checkResponse); 
+  }
 
   likeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {

@@ -186,21 +186,32 @@ profileEditBtn.addEventListener("click", function () {
   profileValidator.resetValidation();
 });
 
+//Добавление новой карточки
 const addNewCardPopup = new PopupWithForm(popupCard, {
   handleFormSubmit: (data) => {
-    // .then((data) => {
-    //   newUser.setUserInfo(data);
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    addNewCardPopup.renderLoading(true);
+    api.apiAddNewCard(data)
+      .then((data) => {
+        const card = createNewCard(data);
+        cardList.addItem(card);
+        addNewCardPopup.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        addNewCardPopup.renderLoading(false);
+      })
   },
 });
 
+addNewCardPopup.setEventListeners();
+
+//Открытие попапа добавления карточки
 addNewCardBtn.addEventListener("click", () => {
-  cardNameInput.value = "";
-  cardSrcInput.value = "";
   addNewCardPopup.open();
+  addNewCardValidator.toggleButtonState();
+  addNewCardValidator.resetValidation();
 });
 
 //обработчик открытия профиля
