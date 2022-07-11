@@ -32,12 +32,12 @@ import {
   firstValidateForm,
   setEventListeners,
 } from "./validate.js";
-import Api from "./Api.js";
+import {Api} from "./Api.js";
 import UserInfo from "./UserInfo.js";
 import { Section } from "./Section.js";
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
-import PopupWithForm from "./PopupWithForm.js";
+import {PopupWithForm} from "./PopupWithForm.js";
 
 const api = new Api(apiConfig);
 
@@ -46,20 +46,21 @@ const newUser = new UserInfo({
   userInfo: ".profile__status",
   userAvatar: ".profile__avatar",
 });
+
 let userId = null;
 
 Promise.all([api.getUser(), api.getInitialCards()])
   .then(([user, cards]) => {
     userId = user._id;
+
    newUser.setUserInfo(user);
    newUser.setUserAvatar(user);
-    cards.reverse();
-    cardList.renderItems(cards);
+
+  cards.reverse();
+  cardList.renderItems(cards);
   })
   .catch((err) => console.log(err));
   
-  
-
 // Добавление готовых карточек на страницу
 const cardList = new Section(
   {
@@ -166,17 +167,23 @@ profileAvatarBtn.addEventListener("click", function () {
 
 const updateProfilePopup = new PopupWithForm(popupProfile, {
   handleFormSubmit: (data) => {
-    console.log(data)
-    console.log(" upd prof data")
-
+    updateProfilePopup.renderLoadingStatus(true);
     api.editUser(data)
-      newUser.getUserInfo(data);
-      updateProfilePopup.close()
-   .catch((err) => {
-         console.log(err);
-       });
+      .then((res) => {
+        newUser.setUserInfo(res);
+        updateProfilePopup.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        updateProfilePopup.renderLoadingStatus(false);
+      })
   },
 });
+
+updateProfilePopup.setEventListeners();
+
 //открывает попап профиля
 profileEditBtn.addEventListener("click", function () {
   updateProfilePopup.open();
@@ -189,19 +196,28 @@ profileEditBtn.addEventListener("click", function () {
 
 const addNewCardPopup = new PopupWithForm(popupCard, {
   handleFormSubmit: (data) => {
-    // .then((data) => {
-    //   newUser.setUserInfo(data);
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
-  },
+    addNewCardPopup.renderLoadingStatus(true);
+    api.apiAddNewCard(data)
+        .then((data) => {
+            const card = createNewCard(data);
+            cardList.addItem(card);
+            addNewCardPopup.close();
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .finally(() => {
+          addNewCardPopup.renderLoadingStatus(false);
+        })
+}
 });
 
+addNewCardPopup.setEventListeners();
+
 addNewCardBtn.addEventListener("click", () => {
-  cardNameInput.value = "";
-  cardSrcInput.value = "";
   addNewCardPopup.open();
+  addNewCardValidator.toggleButtonState();
+  addNewCardValidator.resetValidation();
 });
 
 //обработчик открытия профиля
