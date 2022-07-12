@@ -1,37 +1,33 @@
 import {
-  cardSubmitBtn,
-  profileName,
-  profileStatus,
-  profileAvatar,
   cardSrcInput,
   cardNameInput,
   avatarUrlinp,
   nameInput,
   jobInput,
 } from "./variables.js";
-import { initialCards } from "./Card.js";
-import { renderLoading } from "./modal";
 
 export class Api {
-
  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
   }
-  //получ информации о пользователе с сервера
+
+  //Получение информации о пользователе с сервера
   getUser() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
     }).then(this._checkResponse);
   }
-  //Метод получения карточек с сервера
+
+  //Получение карточек с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     }).then(this._checkResponse);
   }
-  //редактирование аватара
+
+  //Редактирование аватара
   editAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
@@ -40,9 +36,9 @@ export class Api {
         avatar: avatarUrlinp.value
       })
     }).then(this._checkResponse)
-  };
+  }
 
-  //редактированиt профиля
+  //Редактирование профиля
   editUser(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
@@ -54,6 +50,7 @@ export class Api {
     }).then(this._checkResponse);
   }
 
+  //Добавление новой карточки
   apiAddNewCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
         method: 'POST',
@@ -65,6 +62,7 @@ export class Api {
     }) .then(this._checkResponse); 
   }
 
+  //Лайки
   likeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
@@ -78,6 +76,8 @@ export class Api {
       headers: this._headers,
     }).then(this._checkResponse);
   }
+
+  //Удаление карточки
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
@@ -85,6 +85,7 @@ export class Api {
     }).then(this._checkResponse);
   }
 
+  //Проверка ответа сервера
   _checkResponse(res) {
     if (res.ok) {
       return res.json();

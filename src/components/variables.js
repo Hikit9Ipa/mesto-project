@@ -1,34 +1,6 @@
-// const initialCards = [
-//   {
-//     name: "Архыз",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-//   },
-//   {
-//     name: "Челябинская область",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-//   },
-//   {
-//     name: "Иваново",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-//   },
-//   {
-//     name: "Камчатка",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-//   },
-//   {
-//     name: "Холмогорский район",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-//   },
-//   {
-//     name: "Байкал",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-//   },
-// ];
 const popupClosebtns = document.querySelectorAll(".popup__close");
 const profileEditBtn = document.querySelector("#prifile-edit-btn");
-const profileAvatarBtn = document.querySelector(
-  "#profile__avatar-update-button"
-); //кнопка редактирования профиля
+const profileAvatarBtn = document.querySelector("#profile__avatar-update-button"); //кнопка редактирования профиля
 const addNewCardBtn = document.querySelector(".profile__add-btn"); //кнопка добавления карточки
 const cardPopupCloseBtn = document.querySelector("#cardPopupCloseBtn"); //кнопка закрытия формы редактирования
 const cardSubmitBtn = document.querySelector("#cardSubmitBtn"); //кнопка сохранения карты
@@ -102,6 +74,5 @@ export {
   ElementElement,
   avatarUrlinp,
   avatarSubmBtn,
-  //initialCards
   apiConfig
 };
