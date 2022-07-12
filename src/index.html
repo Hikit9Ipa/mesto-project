@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="index/index.css" /> -->
     <title>Mesto</title>
   </head>
   <body class="page">
@@ -14,8 +13,7 @@
     <main class="main">
       <section class="profile">
         <div class="profile__avatar-container">
-        <!-- <img class="profile__avatar" src="" alt="Аватарка" /> -->
-        <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Аватарка" />
+        <img class="profile__avatar" src="" alt="Аватарка" />
         <div class="profile__avatar-overlay">
           <button type="button" id="profile__avatar-update-button" class="profile__avatar-update-button"></button>
         </div>
@@ -28,48 +26,6 @@
         <button type="button" class="profile__add-btn" id="card-add-btn"></button>
       </section>
       <section class="elements">
-        <!-- <div class="elements__element">
-          <img class="elements__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск">
-          <div class="elements__info">
-            <h2 class="elements__title">Карачаевск</h2>
-            <button type="button" class="elements__heart-btn"></button>
-          </div>
-        </div>
-        <div class="elements__element">
-          <img class="elements__image" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус">
-          <div class="elements__info">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button type="button" class="elements__heart-btn"></button>
-          </div>
-        </div>
-        <div class="elements__element">
-          <img class="elements__image" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай">
-          <div class="elements__info">
-            <h2 class="elements__title">Домбай</h2>
-            <button type="button" class="elements__heart-btn"></button>
-          </div>
-        </div>
-        <div class="elements__element">
-          <img class="elements__image" src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус">
-          <div class="elements__info">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button type="button" class="elements__heart-btn"></button>
-          </div>
-        </div>
-        <div class="elements__element">
-          <img class="elements__image" src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай">
-          <div class="elements__info">
-            <h2 class="elements__title">Домбай</h2>
-            <button type="button" class="elements__heart-btn"></button>
-          </div>
-        </div>
-        <div class="elements__element">
-          <img class="elements__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск">
-          <div class="elements__info">
-            <h2 class="elements__title">Карачаево-Черкесия</h2>
-            <button type="button" class="elements__heart-btn"></button>
-          </div>
-        </div> -->
       </section>
     </main>
     <footer class="footer">
@@ -97,7 +53,7 @@
               placeholder = "Имя"
               required
             />
-            <span class="popup__input-name_error"></span> 
+            <span class="popup__error popup__input-name-error"></span> 
             <input
               name="status"
               type="text"
@@ -109,7 +65,7 @@
               placeholder = "Профессия"
               required
             />
-            <span class="popup__input-status_error"></span> 
+            <span class="popup__error popup__input-status-error"></span> 
           </fieldset>
           <button
             type="submit"
@@ -137,7 +93,6 @@
             <input
               name="cardname"
               type="text"
-              value="Название"
               class="popup__input"
               id="popup__input-cardname"
               minlength="2"
@@ -145,17 +100,16 @@
               placeholder = "Название"
               required
             />
-            <span class="popup__input-cardname_error"></span> 
+            <span class="popup__error popup__input-cardname-error"></span> 
             <input
               name="cardsrc"
               type="url"
-              value="Ссылка на картинку"
               class="popup__input"
               id="popup__input-cardsrc"
               placeholder = "Ссылка на картинку"
               required
             />
-            <span class="popup__input-cardsrc_error"></span> 
+            <span class="popup__error popup__input-cardsrc-error"></span> 
           </fieldset>
           <button
             type="submit"
@@ -188,7 +142,7 @@
               placeholder = "Ссылка на аватар" 
               required
             />
-            <span class="url-avatar-input_error"></span> 
+            <span class="popup__error url-avatar-input-error"></span> 
           </fieldset>
           <button
             type="submit"
@@ -235,7 +189,5 @@
         </form>
       </div>
     </div>
-    <!-- <script src="./index/index.js"></script>
-    <script src="./components/validate.js"></script> -->
   </body>
 </html>

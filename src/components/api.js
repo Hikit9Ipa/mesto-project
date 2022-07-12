@@ -1,190 +1,95 @@
 import {
-    cardSubmitBtn,
-    profileName,
-    profileStatus,
-    profileAvatar,
-    profileBtnSubmit,
-    avatarSubmBtn,
-  } from "./utils.js";
-  import { initialCards } from "./card.js";
-  import { renderLoading } from "./modal";
-  
-  const apiConfig = {
-    baseUrl: "https://nomoreparties.co/v1/plus-cohort-11",
-    headers: {
-      authorization: "5e97ff51-83fb-4a87-a9ba-ca3be6f4f066",
-      "Content-Type": "application/json",
-    },
-  };
-// ver 9.0   function getUser() {
-//     return fetch(`${apiConfig.baseUrl}/users/me`, {
-//       headers: apiConfig.headers,
-//     })
-//       .then(_checkResponse)
-//       .then((result) => {
-//         profileName.textContent = result.name;
-//         profileStatus.textContent = result.about;
-//         profileAvatar.src = result.avatar;
-//        console.log(result.name + " " + result.about + " " + result.avatar);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }
-  
-//   function getInitialCards() {
-//     return fetch(`${apiConfig.baseUrl}/cards`, {
-//       headers: apiConfig.headers,
-//     })
-//       .then(_checkResponse)
-//       .then((result) => {
-//         initialCards(result);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }
-  function getUser() {
-    return fetch(`${apiConfig.baseUrl}/users/me`, {
-      headers: apiConfig.headers,
-    })
-      .then(_checkResponse)
-      //.then((result) => {console.log(result)
-    //     profileName.textContent = result.name;
-    //     profileStatus.textContent = result.about;
-    //     profileAvatar.src = result.avatar;
-    //    // console.log(result.name + " " + result.about + " " + result.avatar);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  };
-  
-  function getInitialCards() {
-    return fetch(`${apiConfig.baseUrl}/cards`, {
-      headers: apiConfig.headers,
-    })
-      .then(_checkResponse)
-    //   .then((result) => {
-    //     initialCards(result);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  };
-  //редактирование аватара
-  function editAvatar(avatar) {
-    return fetch (`${apiConfig.baseUrl}/users/me/avatar`, {
-        method: 'PATCH',
-        headers: apiConfig.headers,
-        body: JSON.stringify ({
-          avatar: avatar
-        })
+  cardSrcInput,
+  cardNameInput,
+  avatarUrlinp,
+  nameInput,
+  jobInput,
+} from "./variables.js";
+
+export class Api {
+ constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
+  }
+
+  //Получение информации о пользователе с сервера
+  getUser() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
+
+  //Получение карточек с сервера
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
+
+  //Редактирование аватара
+  editAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatarUrlinp.value
       })
-      .then (_checkResponse)
-    //   .then((res) => {
-    //    // renderLoading(false, avatarSubmBtn, 'Сохранить');
-    //    // console.log(res);
-  
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
-  };
-  
-  //редактированиt профиля
-  function editUser(nameInput, profileStatus) {
-    return fetch (`${apiConfig.baseUrl}/users/me`, {
-        method: 'PATCH',
-        headers: apiConfig.headers,
-        body: JSON.stringify ({
-          name: nameInput,
-          about: profileStatus
-        })
-      })
-      .then (_checkResponse)
-      //.then((res) => {console.log(res)})
-    //   .then((res) => {
-    //     //console.log('3');
-    //    // renderLoading(false, profileBtnSubmit, 'Сохранить');
-    //    // console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
-  };
-  
-  function apiAddNewCard(title, src) {
-    return fetch (`${apiConfig.baseUrl}/cards`, {
+    }).then(this._checkResponse)
+  }
+
+  //Редактирование профиля
+  editUser(data) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: nameInput.value,
+        about: jobInput.value
+      }),
+    }).then(this._checkResponse);
+  }
+
+  //Добавление новой карточки
+  apiAddNewCard(data) {
+    return fetch(`${this._baseUrl}/cards`, {
         method: 'POST',
-        headers: apiConfig.headers,
-        body: JSON.stringify ({
-          name: title,
-          link: src
+        headers: this._headers,
+        body: JSON.stringify({
+          name: cardNameInput.value,
+            link: cardSrcInput.value
         })
-      })
-      .then (_checkResponse)
-    //   .then((res) => {
-    //    // renderLoading(false, cardSubmitBtn, 'Создать');
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
-  };
-  function likeCard(cardId) {
-      return fetch (`${apiConfig.baseUrl}/cards/likes/${cardId}`, {
-          method: 'PUT',
-          headers: apiConfig.headers,
-        })
-        .then (_checkResponse)
-        // .then ((res) => {
-        //   cardlikes.textContent = res.likes.length;
-        // })
-        // .catch((err) => {
-        //   console.log(err);
-        // });
-    };
-  
-    function dislikeCard(cardId, cardlikes) {
-      return fetch (`${apiConfig.baseUrl}/cards/likes/${cardId}`, {
-          method: 'DELETE',
-          headers: apiConfig.headers,
-        })
-        .then (_checkResponse)
-        // .then ((res) => {
-        //   cardlikes.textContent = res.likes.length;
-        // })
-        // .catch((err) => {
-        //   console.log(err);
-        // });
-    };
-    function deleteCard(cardId) {
-      return fetch (`${apiConfig.baseUrl}/cards/${cardId}`, {
-          method: 'DELETE',
-          headers: apiConfig.headers,
-        })
-        .then (_checkResponse)
-        // .catch((err) => {
-        //   console.log(err);
-        // });
-      };
+    }) .then(this._checkResponse); 
+  }
 
+  //Лайки
+  likeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
 
-      function _checkResponse(res) {
-        if (res.ok) {
-            return res.json();
-          }
-            return Promise.reject(`Ошибка: ${res.status}`);
+  dislikeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
+
+  //Удаление карточки
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
+
+  //Проверка ответа сервера
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
     }
-  
-  export {
-    getUser,
-    getInitialCards,
-    editUser,
-    editAvatar,
-    apiAddNewCard,
-     likeCard,
-    dislikeCard,
-   deleteCard,
-  };
-  
+    return Promise.reject(`Ошибка: ${res.status},${res.statusTex}`);
+  }
+}
