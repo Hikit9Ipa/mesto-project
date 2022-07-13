@@ -4,7 +4,7 @@ import {
   avatarUrlinp,
   nameInput,
   jobInput,
-} from "./variables.js";
+} from "../utils/Variables.js";
 
 export class Api {
  constructor({ baseUrl, headers }) {

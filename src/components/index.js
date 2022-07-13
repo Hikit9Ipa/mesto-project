@@ -15,7 +15,7 @@ import {
   popupAvatar,
   apiConfig,
   imgOpen,
-} from "./variables.js";
+} from "../utils/Variables.js";
 
 import {Api} from "./Api.js";
 import UserInfo from "./UserInfo.js";
@@ -123,7 +123,7 @@ const updateAvatarPopup = new PopupWithForm(popupAvatar, {
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        updateAvatarPopup.renderLoading(false);
+        updateAvatarPopup.renderLoadingStatus(false);
     })   
   }
 })
