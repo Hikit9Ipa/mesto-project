@@ -4,8 +4,6 @@ import {
   addNewCardBtn,
   nameInput,
   jobInput,
-  profileName,
-  profileStatus,
   cardsContainer,
   cardTemplate,
   popupProfile,
@@ -18,7 +16,7 @@ import {
 } from "../utils/variables.js";
 
 import {Api} from "./Api.js";
-import UserInfo from "./UserInfo.js";
+import {UserInfo} from "./UserInfo.js";
 import {Section} from "./Section.js";
 import {Card} from "./Card.js";
 import {FormValidator} from "./FormValidator.js";
@@ -154,12 +152,17 @@ const updateProfilePopup = new PopupWithForm(popupProfile, {
   }
 });
 
+function editProfile() {
+  const userData = newUser.getUserInfo();
+  nameInput.value = userData.name;
+  jobInput.value = userData.about;
+}
+
 updateProfilePopup.setEventListeners();
 
 profileEditBtn.addEventListener("click", function () {
+  editProfile()
   updateProfilePopup.open();
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileStatus.textContent;
   
   profileValidator.toggleButtonState();
   profileValidator.resetValidation();

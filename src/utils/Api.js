@@ -38,7 +38,7 @@ export class Api {
          body: JSON.stringify({
            name: data.name,
            about: data.about
-         }),
+         })
        }).then(this._checkResponse);
      }
    

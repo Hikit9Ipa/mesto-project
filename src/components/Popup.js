@@ -18,13 +18,13 @@ export class Popup {
     if (evt.key === "Escape") {
       this.close();
     }
-  };
+  }
   
   setEventListeners() {
     this._popupSelector.addEventListener('mousedown', (evt) => {
         if (evt.target.classList.contains("popup_opened") || evt.target.classList.contains("popup__close")) {
             this.close();
         }
-    });
+    })
   }
 }
