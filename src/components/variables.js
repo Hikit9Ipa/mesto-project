@@ -27,6 +27,7 @@ const popupProfile = document.querySelector("#popup-profile");
 const popupCard = document.querySelector("#popup-card");
 const formInput = formElement.querySelector(".popup__input");
 const popups = document.querySelectorAll(".popup");
+
 const enableValidationParams = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
@@ -35,6 +36,7 @@ const enableValidationParams = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_active",
 };
+
 const apiConfig = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-11",
   headers: {
