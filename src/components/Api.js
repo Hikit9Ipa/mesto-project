@@ -1,11 +1,3 @@
-import {
-  cardSrcInput,
-  cardNameInput,
-  avatarUrlinp,
-  nameInput,
-  jobInput,
-} from "../utils/Variables.js";
-
 export class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -33,11 +25,10 @@ export class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        //avatar: avatarUrlinp.value
         avatar: data.avatarUrl,
       })
     }).then(this._checkResponse);
-  };
+  }
 
   //Редактирование профиля
   editUser(data) {
@@ -45,11 +36,9 @@ export class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-       // name: nameInput.value,
-        //about: jobInput.value,
         name: data.name,
         about: data.status,
-      }),
+      })
     }).then(this._checkResponse);
   }
 
@@ -59,8 +48,6 @@ export class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        //name: cardNameInput.value,
-       // link: cardSrcInput.value,
         name: data.cardname,
         link: data.cardsrc,
       }),

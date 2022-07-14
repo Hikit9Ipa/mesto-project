@@ -114,7 +114,6 @@ popupOpenImage.setEventListeners();
 const updateAvatarPopup = new PopupWithForm(popupAvatar, {
   handleFormSubmit: (data) => {
     updateAvatarPopup.renderLoadingStatus(true);
-    //console.log(data);
     api.editAvatar(data)
       .then((data) => {
         newUser.setUserAvatar(data);
