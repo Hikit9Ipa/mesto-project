@@ -15,7 +15,7 @@ import {
   popupAvatar,
   apiConfig,
   imgOpen,
-} from "../utils/Variables.js";
+} from "../utils/variables.js";
 
 import {Api} from "./Api.js";
 import UserInfo from "./UserInfo.js";
