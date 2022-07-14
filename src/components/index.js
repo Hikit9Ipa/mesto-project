@@ -13,7 +13,7 @@ import {
   popupAvatar,
   apiConfig,
   imgOpen,
-} from "../utils/variables.js";
+} from "../utils/Variables.js";
 
 import {Api} from "./Api.js";
 import {UserInfo} from "./UserInfo.js";
@@ -114,6 +114,7 @@ popupOpenImage.setEventListeners();
 const updateAvatarPopup = new PopupWithForm(popupAvatar, {
   handleFormSubmit: (data) => {
     updateAvatarPopup.renderLoadingStatus(true);
+    //console.log(data);
     api.editAvatar(data)
       .then((data) => {
         newUser.setUserAvatar(data);
@@ -138,6 +139,7 @@ profileAvatarBtn.addEventListener("click", function () {
 const updateProfilePopup = new PopupWithForm(popupProfile, {
   handleFormSubmit: (data) => {
     updateProfilePopup.renderLoadingStatus(true);
+    console.log(data);
     api.editUser(data)
       .then((res) => {
         newUser.setUserInfo(res);
@@ -163,7 +165,7 @@ updateProfilePopup.setEventListeners();
 profileEditBtn.addEventListener("click", function () {
   editProfile()
   updateProfilePopup.open();
-  
+
   profileValidator.toggleButtonState();
   profileValidator.resetValidation();
 });
@@ -171,6 +173,7 @@ profileEditBtn.addEventListener("click", function () {
 //Добавление новой карточки
 const addNewCardPopup = new PopupWithForm(popupCard, {
   handleFormSubmit: (data) => {
+    console.log(data)
     addNewCardPopup.renderLoadingStatus(true);
     api.apiAddNewCard(data)
       .then((data) => {
