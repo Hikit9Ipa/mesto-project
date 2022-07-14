@@ -7,7 +7,7 @@ import {
 } from "../utils/Variables.js";
 
 export class Api {
- constructor({ baseUrl, headers }) {
+  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
   }
@@ -29,14 +29,15 @@ export class Api {
 
   //Редактирование аватара
   editAvatar(data) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return fetch (`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatarUrlinp.value
+        //avatar: avatarUrlinp.value
+        avatar: data.avatarUrl,
       })
-    }).then(this._checkResponse)
-  }
+    }).then(this._checkResponse);
+  };
 
   //Редактирование профиля
   editUser(data) {
@@ -44,8 +45,10 @@ export class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: nameInput.value,
-        about: jobInput.value
+       // name: nameInput.value,
+        //about: jobInput.value,
+        name: data.name,
+        about: data.status,
       }),
     }).then(this._checkResponse);
   }
@@ -53,13 +56,15 @@ export class Api {
   //Добавление новой карточки
   apiAddNewCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
-        method: 'POST',
-        headers: this._headers,
-        body: JSON.stringify({
-          name: cardNameInput.value,
-            link: cardSrcInput.value
-        })
-    }) .then(this._checkResponse); 
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        //name: cardNameInput.value,
+       // link: cardSrcInput.value,
+        name: data.cardname,
+        link: data.cardsrc,
+      }),
+    }).then(this._checkResponse);
   }
 
   //Лайки
