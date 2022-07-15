@@ -169,7 +169,6 @@ profileEditBtn.addEventListener("click", function () {
 //Добавление новой карточки
 const addNewCardPopup = new PopupWithForm(popupCard, {
   handleFormSubmit: (data) => {
-    console.log(data)
     addNewCardPopup.renderLoadingStatus(true);
     api.apiAddNewCard(data)
       .then((data) => {
