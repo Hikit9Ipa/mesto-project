@@ -6,3 +6,7 @@
     margin-bottom: -4px;
     min-height: 282px;
 }
+
+.elements__image:hover {
+    cursor: pointer;
+}
