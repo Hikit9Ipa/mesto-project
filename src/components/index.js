@@ -130,7 +130,6 @@ updateAvatarPopup.setEventListeners();
 
 profileAvatarBtn.addEventListener("click", function () {
   updateAvatarPopup.open();
-  avatarValidator.toggleButtonState();
   avatarValidator.resetValidation();
 });
 
@@ -164,8 +163,6 @@ updateProfilePopup.setEventListeners();
 profileEditBtn.addEventListener("click", function () {
   editProfile()
   updateProfilePopup.open();
-
-  profileValidator.toggleButtonState();
   profileValidator.resetValidation();
 });
 
@@ -193,6 +190,5 @@ addNewCardPopup.setEventListeners();
 
 addNewCardBtn.addEventListener("click", () => {
   addNewCardPopup.open();
-  addNewCardValidator.toggleButtonState();
   addNewCardValidator.resetValidation();
 });
