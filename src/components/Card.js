@@ -1,5 +1,5 @@
 export class Card {
-  constructor({data, userId, handleCardClick, handleDeleteCard, handleLikeCard}, cardTemplateSelector) {
+  constructor({data, userId, handleCardClick, handleDeleteCard, handleLikeCard}, cardTemplate) {
     this._title = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -9,12 +9,12 @@ export class Card {
     this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
     this._handleLikeCard = handleLikeCard;
-    this._cardTemplateSelector = cardTemplateSelector;
+    this._cardTemplate = cardTemplate;
   }
 
   _getTemplate() {
     return document
-      .querySelector(this._cardTemplateSelector)
+      .querySelector(this._cardTemplate)
       .content
       .querySelector('.elements__element')
       .cloneNode(true);
